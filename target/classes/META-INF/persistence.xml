@@ -7,8 +7,12 @@
 	<persistence-unit name="persistenceUnit"
 		transaction-type="RESOURCE_LOCAL">
 
-		<class>org.formation.model.Item</class>
-		<class>org.formation.model.Order</class>
+		<class>com.projet.entity.Client</class>
+		<class>com.projet.entity.Counselor</class>
+		<class>com.projet.entity.Manager</class>
+		<class>com.projet.entity.User</class>
+		<class>com.projet.entity.SavingAccount</class>
+		<class>com.projet.entity.CurrentAccount</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
