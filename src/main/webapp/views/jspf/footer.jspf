@@ -1,0 +1,17 @@
+</body>
+
+	<!--   Core JS Files   -->
+	<script src="assets/lib/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+	<script src="assets/lib/bootstrap/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="assets/common/js/bootstrap-checkbox-radio-switch.js"></script>
+	
+	<!--  Charts Plugin -->
+	<script src="assets/common/js/chartist.min.js"></script>
+	
+	<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="assets/common/js/light-bootstrap-dashboard.js"></script>
+
+</html>
