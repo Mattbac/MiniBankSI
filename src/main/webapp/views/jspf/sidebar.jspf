@@ -1,0 +1,23 @@
+<div class="sidebar" data-color="blue">
+
+	<div class="sidebar-wrapper">
+		<div class="logo"></div>
+
+		<ul class="nav">
+			<li><a href="index.html"> <i class="pe-7s-graph"></i>
+					<p>Tableau de bord</p>
+			</a></li>
+			<li class="active"><a href="posts.html"> <i
+					class="pe-7s-note"></i>
+					<p>Gerants</p>
+			</a></li>
+			<li><a href="pages.html"> <i class="pe-7s-file"></i>
+					<p>Clients</p>
+			</a></li>
+			<li><a href="profil.html"> <i class="pe-7s-user"></i>
+					<p>Options</p>
+			</a></li>
+		</ul>
+
+	</div>
+</div>

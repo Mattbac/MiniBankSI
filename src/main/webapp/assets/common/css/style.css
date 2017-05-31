@@ -1,0 +1,24 @@
+.logo {
+	height: 61px;
+}
+
+.navbar {
+	height: 61px;
+}
+
+.content {
+	height: 100%;
+}
+
+
+.btn-post-action.btn-simple.btn-icon {
+    padding: 0 8px;
+}
+
+.btn-page-action.btn-simple.btn-icon {
+    padding: 4px 8px;
+}
+
+.btn-create-page {
+    
+}
