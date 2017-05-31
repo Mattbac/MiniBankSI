@@ -56,8 +56,11 @@
 	</bean>
 
 
-	<bean
-		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<mvc:resources mapping="/assets/**" location="/assets/" />
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -72,7 +75,7 @@
 	</bean>-->
 	
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/admin/*" access="ROLE_ADMIN" />
+		<security:intercept-url pattern="/admin" access="ROLE_ADMIN" />
 	</security:http>
 	
 	<security:authentication-manager>
@@ -86,4 +89,3 @@
 	</security:authentication-manager>
 	
 </beans>
-
