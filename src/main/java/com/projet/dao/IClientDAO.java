@@ -5,7 +5,7 @@ import java.util.List;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 
-public interface ClientDAO {
+public interface IClientDAO {
 
 	public void createClient(Client client);
 	public Client findClientById(Long id);

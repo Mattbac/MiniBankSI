@@ -2,7 +2,7 @@ package com.projet.dao;
 
 import com.projet.entity.Account;
 
-public interface AccountDAO {
+public interface IAccountDAO {
 
 	public Account findAccountById(long id);
 	public void createAccount();
