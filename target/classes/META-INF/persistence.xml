@@ -16,6 +16,7 @@
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.default_schema" value="test"></property>
 		</properties>
 	</persistence-unit>
 

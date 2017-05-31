@@ -1,14 +1,23 @@
 package com.projet.entity;
 
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="saving_account")
 public class SavingAccount extends AbstractAccount {
 
-	private double remuneration;
+	@Column(name="remuneration_rate", nullable=false)
+	private BigDecimal remunerationRate;
 
-	public double getRemuneration() {
-		return remuneration;
+	public BigDecimal getRemunerationRate() {
+		return remunerationRate;
 	}
 
-	public void setRemuneration(double remuneration) {
-		this.remuneration = remuneration;
+	public void setRemunerationRate(BigDecimal remunerationRate) {
+		this.remunerationRate = remunerationRate;
 	}
 }

@@ -38,7 +38,6 @@
 				<property name="generateDdl" value="true" />
 				<property name="database" value="MYSQL" />
 				<property name="databasePlatform" value="${jdbc.dialect}" />
-
 			</bean>
 		</property>
 		<!-- Persistence Unit -->
