@@ -2,10 +2,15 @@ package com.projet.dao.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
 
 import com.projet.dao.ICurrentAccountDao;
 import com.projet.entity.CurrentAccount;
 
+@Transactional
+@Repository
 public class CurrentAccountDaoImpl implements ICurrentAccountDao{
 
 	@PersistenceContext
@@ -18,7 +23,9 @@ public class CurrentAccountDaoImpl implements ICurrentAccountDao{
 
 	@Override
 	public void createAccount(CurrentAccount account) {
-		em.persist(account);		
+		System.out.println("test");
+		em.merge(account);
+		System.out.println("test");
 	}
 
 	@Override

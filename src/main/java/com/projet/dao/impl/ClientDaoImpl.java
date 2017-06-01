@@ -6,10 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import com.projet.dao.IClientDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 
+@Repository
 public class ClientDaoImpl implements IClientDAO{
 
 	@PersistenceContext
