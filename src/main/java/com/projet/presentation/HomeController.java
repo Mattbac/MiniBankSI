@@ -18,4 +18,12 @@ public class HomeController {
 
 		return "dashboard";
 	}
+	
+	
+	@RequestMapping("/login")
+	public String login(){
+		
+		return "login";
+	}
+
 }
