@@ -1,14 +1,21 @@
 package com.projet.entity;
 
-public class Manager extends AbstractPerson {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-	private String AgencyName;
+@Entity
+@Table(name="manager")
+public class Manager extends AbstractPerson {
+	
+	@Column(name="agency_name", nullable=false)
+	private String agencyName;
 
 	/* Getter */
-	public String getAgencyName() { return AgencyName; }
+	public String getAgencyName() { return agencyName; }
 
 	/* Setter */
-	public void setAgencyName(String agencyName) { AgencyName = agencyName; }
+	public void setAgencyName(String agencyName) { this.agencyName = agencyName; }
 	
 	
 }
