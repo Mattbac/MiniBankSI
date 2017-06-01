@@ -19,12 +19,12 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String home() {
-		CurrentAccount c = new CurrentAccount();
-		c.setCreated(new Date());
-		c.setOverdrawn(new BigDecimal(12.0));
-		c.setSold(new BigDecimal(45.0));
-		
-		currentAccountDaoImpl.createAccount(c);
+//		CurrentAccount c = new CurrentAccount();
+//		c.setCreated(new Date());
+//		c.setOverdrawn(new BigDecimal(12.0));
+//		c.setSold(new BigDecimal(45.0));
+//		
+//		currentAccountDaoImpl.createAccount(c);
 		return "home";
 	}
 	
@@ -33,12 +33,4 @@ public class HomeController {
 
 		return "dashboard";
 	}
-	
-	
-//	@RequestMapping("/login")
-//	public String login(){
-//		
-//		return "login";
-//	}
-
 }
