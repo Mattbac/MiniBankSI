@@ -15,8 +15,6 @@ import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.service.IClientService;
 
-import com.projet.dao.ICurrentAccountDao;
-
 @Controller
 public class HomeController {
 
