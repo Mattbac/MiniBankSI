@@ -8,7 +8,8 @@
   <url>https://github.com/Mattbac/MiniBankSI</url>
   <properties>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
-		<spring.framework.version>4.0.3.RELEASE</spring.framework.version>
+		<spring.framework.version>4.3.8.RELEASE</spring.framework.version>
+		<spring.security.version>4.2.2.RELEASE</spring.security.version>
 	</properties>
   
   <repositories>
@@ -140,13 +141,13 @@
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-config</artifactId>
-		    <version>${spring.framework.version}</version>
+		    <version>${spring.security.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-taglibs -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-taglibs</artifactId>
-		    <version>${spring.framework.version}</version>
+		    <version>${spring.security.version}</version>
 		</dependency>
         
         <!-- DBCP Pooling jdbc connections -->
