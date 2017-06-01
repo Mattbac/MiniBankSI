@@ -74,13 +74,20 @@
 	</bean>-->
 	
 	<security:http auto-config="true">
-		<security:intercept-url pattern="/admin" access="hasRole('admin')" />
-		<security:csrf disabled="true" />
+		<security:intercept-url pattern="/login" access="permitAll" />
+		<security:intercept-url pattern="/counselor*" access="hasAnyRole('counselor', 'manager')" />
+		<security:intercept-url pattern="/manager*" access="hasAnyRole('manager')" />
+		<security:form-login
+		  login-page='/login'
+		  login-processing-url="/login"
+		  authentication-failure-url="/login.html?error=true"/>
+		<security:csrf disabled="true"/>
 	</security:http>
 	
 	<security:authentication-manager>
 		<security:authentication-provider>
 <!-- 		<security:password-encoder ref="encoder" />  -->
+
 			<security:jdbc-user-service data-source-ref="dataSource" 
 				users-by-username-query="SELECT user_login, user_password, user_enabled FROM user WHERE user_login = ?" 
 				authorities-by-username-query="SELECT user.user_login, role.role_name FROM user, role WHERE user_login = ?" />

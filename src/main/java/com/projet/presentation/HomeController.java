@@ -1,15 +1,11 @@
 package com.projet.presentation;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.projet.dao.ICurrentAccountDao;
-import com.projet.entity.CurrentAccount;
 
 @Controller
 public class HomeController {
@@ -28,9 +24,20 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
-	public String dashboard() {
+	@RequestMapping(value = {"/counselor"}, method = RequestMethod.GET)
+	public String dashboardcounselor() {
 
 		return "dashboard";
+	}
+	
+	@RequestMapping(value = {"/manager"}, method = RequestMethod.GET)
+	public String dashboardmanager() {
+
+		return "dashboard";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
 	}
 }
