@@ -15,6 +15,8 @@ import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.service.IClientService;
 
+import com.projet.dao.ICurrentAccountDao;
+
 @Controller
 public class HomeController {
 
@@ -28,11 +30,12 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
-	public String dashboard() {
+	@RequestMapping(value = {"/counselor"}, method = RequestMethod.GET)
+	public String dashboardcounselor() {
 
 		return "dashboard";
 	}
+
 
 	@GetMapping("/counselor/see/clients")
 	public ModelAndView listeClients(@RequestParam(required = false) Integer pageNumber) {
@@ -47,5 +50,16 @@ public class HomeController {
 		mav.addObject("currentPage", page.getPage());
 		mav.addObject("clients", page.getPageList());
 		return mav;
+	}
+	
+	@RequestMapping(value = {"/manager"}, method = RequestMethod.GET)
+	public String dashboardmanager() {
+
+		return "dashboard";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
 	}
 }
