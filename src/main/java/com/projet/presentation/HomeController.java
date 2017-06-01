@@ -17,7 +17,7 @@ public class HomeController {
 	@Autowired
 	public ICurrentAccountDao currentAccountDaoImpl;
 	
-	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String home() {
 		CurrentAccount c = new CurrentAccount();
 		c.setCreated(new Date());
@@ -26,5 +26,11 @@ public class HomeController {
 		
 		currentAccountDaoImpl.createAccount(c);
 		return "home";
+	}
+	
+	@RequestMapping(value = {"/admin"}, method = RequestMethod.GET)
+	public String dashboard() {
+
+		return "dashboard";
 	}
 }
