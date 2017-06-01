@@ -73,17 +73,17 @@
 		<constructor-arg value="12" />
 	</bean>-->
 	
-	<security:http auto-config="true">
-		<security:intercept-url pattern="/admin" access="ROLE_ADMIN" />
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/admin" access="admin" />
+		<security:csrf disabled="true" />
 	</security:http>
 	
 	<security:authentication-manager>
 		<security:authentication-provider>
-			<!-- <security:password-encoder ref="encoder" />  -->
-			<security:user-service>
-				<!-- <security:user name="admin" password="$2a$12$Rc2FWp9PG6P4PF1VGvLgyOfYD4fskwcHZ9sAvErDM.HrUoEtz/pjm" authorities="ROLE_ADMIN"/> -->
-				<security:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-			</security:user-service>
+<!-- 			<security:password-encoder ref="encoder" />  -->
+			<security:jdbc-user-service data-source-ref="dataSource" 
+				users-by-username-query="SELECT user_login, user_password, user_enabled FROM user WHERE user_login = ?" 
+				authorities-by-username-query="SELECT user.login, role.role_name FROM user, role WHERE login = ? AND role_name='admin' " />
 		</security:authentication-provider>
 	</security:authentication-manager>
 	

@@ -35,10 +35,10 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping("/login")
-	public String login(){
-		
-		return "login";
-	}
+//	@RequestMapping("/login")
+//	public String login(){
+//		
+//		return "login";
+//	}
 
 }

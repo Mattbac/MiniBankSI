@@ -13,6 +13,7 @@
 		<class>com.projet.entity.User</class>
 		<class>com.projet.entity.SavingAccount</class>
 		<class>com.projet.entity.CurrentAccount</class>
+		<class>com.projet.entity.Role</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
