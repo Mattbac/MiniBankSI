@@ -87,5 +87,12 @@ public class Client extends AbstractPerson {
 		this.currentAccount = currentAccount;
 	}
 	
+	@Override
+	public String toString() {
+		return "Client [adress=" + adress + ", zipCode=" + zipCode + ", city=" + city + ", phoneNumber=" + phoneNumber
+				+ ", savingAccount=" + savingAccount + ", currentAccount=" + currentAccount + ", counselor=" + counselor
+				+ "]";
+	}
+	
 }
 

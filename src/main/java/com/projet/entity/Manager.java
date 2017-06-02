@@ -26,4 +26,10 @@ public class Manager extends User {
 		super(login, password, role_user);
 		this.agencyName = agencyName;		
 	}
+
+	@Override
+	public String toString() {
+		return "Manager [agencyName=" + agencyName + "]";
+	}
+	
 }

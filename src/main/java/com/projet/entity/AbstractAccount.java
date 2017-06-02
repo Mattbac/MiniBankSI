@@ -47,5 +47,10 @@ public abstract class AbstractAccount {
 		this.sold = sold;
 		this.created = new Date();
 	}
-
+	
+	@Override
+	public String toString() {
+		return "AbstractAccount [id=" + id + ", sold=" + sold + ", created=" + created + "]";
+	}
+	
 }

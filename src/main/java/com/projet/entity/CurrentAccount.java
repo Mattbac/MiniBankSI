@@ -33,4 +33,10 @@ public class CurrentAccount extends AbstractAccount {
 		super(sold);
 		this.overdrawn = overdrawn;
 	}
+
+	@Override
+	public String toString() {
+		return "CurrentAccount [overdrawn=" + overdrawn + "]";
+	}
+	
 }

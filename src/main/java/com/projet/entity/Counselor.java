@@ -30,7 +30,10 @@ public class Counselor extends User {
 		super(login, password, role_user);
 		this.manager = manager;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Counselor [manager=" + manager + "]";
+	}
 		
 }

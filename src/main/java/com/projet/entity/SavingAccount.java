@@ -34,4 +34,10 @@ public class SavingAccount extends AbstractAccount {
 		super(sold);
 		this.remunerationRate = remunerationRate;
 	}
+
+	@Override
+	public String toString() {
+		return "SavingAccount [remunerationRate=" + remunerationRate + "]";
+	}
+	
 }

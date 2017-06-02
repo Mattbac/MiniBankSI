@@ -43,4 +43,9 @@ public abstract class AbstractPerson {
 		this.lastName = lastName;
 	}
 	
+	@Override
+	public String toString() {
+		return "AbstractPerson [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+	
 }
