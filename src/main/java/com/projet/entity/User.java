@@ -36,7 +36,8 @@ public class User {
 	public String getPassword() { return password; }
 	public boolean isEnabled() { return enabled; }
 	public Role getRole_user() { return role_user; }
-		
+
+	
 	/* Setters */
 	public void setLogin(String login) { this.login = login; }
 	public void setPassword(String password) { this.password = password; }
