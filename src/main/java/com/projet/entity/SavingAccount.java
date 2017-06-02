@@ -20,4 +20,18 @@ public class SavingAccount extends AbstractAccount {
 	
 	/* Setter */
 	public void setRemunerationRate(BigDecimal remunerationRate) { this.remunerationRate = remunerationRate; }
+	
+	
+	/* Constructor */
+	public SavingAccount() { 
+		this.remunerationRate = new BigDecimal(0);
+	}
+	public SavingAccount(BigDecimal sold) {
+		super(sold);
+		this.remunerationRate = new BigDecimal(0);
+	}
+	public SavingAccount(BigDecimal sold, BigDecimal remunerationRate) {
+		super(sold);
+		this.remunerationRate = remunerationRate;
+	}
 }

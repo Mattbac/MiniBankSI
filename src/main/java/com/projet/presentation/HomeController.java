@@ -1,5 +1,6 @@
 package com.projet.presentation;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projet.dao.ICounselorDAO;
+import com.projet.dao.ICurrentAccountDAO;
 import com.projet.exception.ClientServiceException;
 import com.projet.dao.IManagerDAO;
 import com.projet.dao.IRoleDAO;
+import com.projet.dao.ISavingAccountDAO;
 import com.projet.dao.IClientDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
@@ -36,7 +39,7 @@ import com.projet.service.UserSecurity;
 @Controller
 public class HomeController {
 
-	final int CLIENTS_PER_PAGE = 2;
+	final int CLIENTS_PER_PAGE = 4;
 	
 	@Autowired
 	private IRoleDAO roleDaoImpl;
@@ -46,6 +49,10 @@ public class HomeController {
 	private IManagerDAO managerDaoImpl;
 	@Autowired
 	private ICounselorDAO counselorDaoImpl;
+	@Autowired
+	private ICurrentAccountDAO currentAccountDaoImpl;
+	@Autowired
+	private ISavingAccountDAO savingAccountDaoImpl;
 	
 	@Autowired
 	private IClientService clientServiceImpl;
@@ -53,7 +60,7 @@ public class HomeController {
 	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String home() {
 		
-		/*Role rc = new Role("ROLE_counselor");
+		Role rc = new Role("ROLE_counselor");
 		roleDaoImpl.create(rc);
 		Role rm = new Role("ROLE_manager");
 		roleDaoImpl.create(rm);
@@ -75,14 +82,33 @@ public class HomeController {
 				
 				for(int k = 0; k < r ;k++){
 					
-//					CurrentAccount current = new CurrentAccount();
-//					SavingAccount saving = new SavingAccount();
+					CurrentAccount current = null;
+					SavingAccount saving = null;
 					
-					Client ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", c);
+					if( Math.floor((Math.random() * 10)) < 5){
+						current = new CurrentAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
+						currentAccountDaoImpl.createAccount(current);
+						
+					}
+					
+					if( current == null || Math.floor((Math.random() * 10)) < 5){
+						saving = new SavingAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
+						savingAccountDaoImpl.createAccount(saving);
+					}
+					
+					Client ct = null;
+					
+					if(current != null && saving != null){
+						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", saving, current, c);
+					}else if(current != null) {
+						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", current, c);
+					}else if(saving != null){
+						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", saving, c);
+					}
 					clientDaoImpl.createClient(ct);
 				}
 			}
-		}*/
+		}
 		
 		return "home";
 	}

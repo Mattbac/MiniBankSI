@@ -62,14 +62,29 @@ public class Client extends AbstractPerson {
 	
 	/* Construtor */
 	public Client() { }
-	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber,
-			Counselor counselor) {
+	private Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber, Counselor counselor) {
 		super(firstName, lastName);
 		this.adress = adress;
 		this.zipCode = zipCode;
 		this.city = city;
 		this.phoneNumber = phoneNumber;
 		this.counselor = counselor;
+	}
+	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber, 
+			CurrentAccount currentAccount, Counselor counselor) {
+		this(firstName, lastName, adress, zipCode, city, phoneNumber, counselor);
+		this.currentAccount = currentAccount;
+	}
+	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber, 
+			SavingAccount savingAccount, Counselor counselor) {
+		this(firstName, lastName, adress, zipCode, city, phoneNumber, counselor);
+		this.savingAccount = savingAccount;
+	}
+	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber, 
+			SavingAccount savingAccount, CurrentAccount currentAccount, Counselor counselor) {
+		this(firstName, lastName, adress, zipCode, city, phoneNumber, counselor);
+		this.savingAccount = savingAccount;
+		this.currentAccount = currentAccount;
 	}
 	
 }

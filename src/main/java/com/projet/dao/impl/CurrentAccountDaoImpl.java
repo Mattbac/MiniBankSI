@@ -23,9 +23,7 @@ public class CurrentAccountDaoImpl implements ICurrentAccountDAO{
 
 	@Override
 	public void createAccount(CurrentAccount account) {
-		System.out.println("test");
-		em.merge(account);
-		System.out.println("test");
+		em.persist(account);
 	}
 
 	@Override

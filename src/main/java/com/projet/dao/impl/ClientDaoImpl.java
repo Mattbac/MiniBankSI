@@ -49,7 +49,7 @@ public class ClientDaoImpl implements IClientDAO{
 
 	@Override
 	public List<Client> findClientsByNegativeSold() {
-		TypedQuery<Client> q = em.createQuery("from client where savingAccount.sold < 0 or currentAccount.sold < 0", Client.class);
+		TypedQuery<Client> q = em.createQuery("from Client where savingAccount.sold < 0 or currentAccount.sold < 0", Client.class);
 		return q.getResultList();
 	}
 

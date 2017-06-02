@@ -37,8 +37,8 @@
                                                 <td><c:out value="${client.city}"/></td>
                                                 <td>
                                                 	<c:choose>
-                                                		<c:when test="${client.currentAccount.sold < -1000 || client.savingAccount.sold < 0}"><c:out value="ok"/></c:when>
-                                                		<c:otherwise><c:out value="ko"/></c:otherwise>
+                                                		<c:when test="${client.currentAccount.sold < 0 || client.savingAccount.sold < 0}"><c:out value="ko"/></c:when>
+                                                		<c:otherwise><c:out value="ok"/></c:otherwise>
                                                 	</c:choose>
                                                 </td>
                                                 <td class="td-actions text-right" style="">

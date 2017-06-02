@@ -11,20 +11,26 @@ import javax.persistence.Table;
 public class CurrentAccount extends AbstractAccount {
 
 	@Column(name="overdrawn", nullable=false)
-	private BigDecimal overdrawn;
-
-	// Le decouvert autorise pour le compte, qui vaut 1000 par defaut
-	@Column(name="overdraft")
-	private BigDecimal overdraft = new BigDecimal(1000.00);
-
+	private BigDecimal overdrawn = new BigDecimal(1000.00);
 	
 	/* Getters */
 	public BigDecimal getOverdrawn() { return overdrawn; }
-	public BigDecimal getOverdraft() { return overdraft; }
 
 	
 	/* Setters */
 	public void setOverdrawn(BigDecimal overdrawn) { this.overdrawn = overdrawn; }
-	public void setOverdraft(BigDecimal overdraft) { this.overdraft = overdraft; }
+
 	
+	/* Constructor */
+	public CurrentAccount() { 
+		this.overdrawn = new BigDecimal(0);
+	}
+	public CurrentAccount(BigDecimal sold) {
+		super(sold);
+		this.overdrawn = new BigDecimal(0);
+	}
+	public CurrentAccount(BigDecimal sold, BigDecimal overdrawn) {
+		super(sold);
+		this.overdrawn = overdrawn;
+	}
 }

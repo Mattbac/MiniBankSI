@@ -22,8 +22,8 @@ public class CounselorDaoImpl implements ICounselorDAO {
 	
 	@Override
 	public List<Counselor> findCounselorsByManager(Manager manager) {
-		TypedQuery<Counselor> q = em.createQuery("from counselor where manager.login = :id", Counselor.class);
-		q.setParameter("id", manager.getLogin());
+		TypedQuery<Counselor> q = em.createQuery("from Counselor where manager = :login", Counselor.class);
+		q.setParameter("login", manager.getLogin());
 		return q.getResultList();
 	}
 
