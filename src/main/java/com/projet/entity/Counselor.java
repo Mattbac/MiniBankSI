@@ -14,7 +14,7 @@ public class Counselor extends User {
 	@ManyToOne
 	@JoinColumn(name="manager", nullable=false)
 	private Manager manager;
-
+	
 	
 	/* Getter */
 	public Manager getManager() { return manager; }
@@ -25,9 +25,12 @@ public class Counselor extends User {
 	
 	
 	/* Constructor */
+	public Counselor() { }
 	public Counselor(String login, String password, Role role_user, Manager manager) {
 		super(login, password, role_user);
 		this.manager = manager;
 	}
+	
+	
 		
 }

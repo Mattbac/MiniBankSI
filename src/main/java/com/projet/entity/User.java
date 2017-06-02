@@ -28,7 +28,7 @@ public class User {
 	private Role role_user;
 	
 	@Column(name="user_enabled", nullable = false, columnDefinition = "BOOLEAN DEFAULT true")
-	private boolean enabled;
+	private boolean enabled = true;
 
 	
 	/* Getters */
@@ -46,6 +46,7 @@ public class User {
 	
 	
 	/* Constructor */
+	public User() { }
 	public User(String login, String password, Role role_user) {
 		super();
 		this.login = login;

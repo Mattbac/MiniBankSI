@@ -37,8 +37,8 @@
                                                 <td><c:out value="${client.city}"/></td>
                                                 <td>
                                                 	<c:choose>
-                                                		<c:when test="${client.currentAccount.sold < -1000 || client.savingAccount.sold < 0}"><c:out value="ok"/></c:when>
-                                                		<c:otherwise><c:out value="ko"/></c:otherwise>
+                                                		<c:when test="${client.currentAccount.sold < 0 || client.savingAccount.sold < 0}"><c:out value="ko"/></c:when>
+                                                		<c:otherwise><c:out value="ok"/></c:otherwise>
                                                 	</c:choose>
                                                 </td>
                                                 <td class="td-actions text-right" style="">
@@ -56,6 +56,20 @@
                                             </c:forEach>
                                        </tbody>
                                     </table>
+                                    <div>
+                                    	<p>
+                                    	<c:forEach begin="1" end="${maxPages}" step="1" var="nPage">
+                                    		<c:choose>
+                                    			<c:when test="${nPage != currentPage + 1}">
+                                    				<a href="clients?pageNumber=${nPage}">${nPage}</a>
+                                    			</c:when>
+                                    			<c:otherwise>
+                                    				<span>${nPage}</span>
+                                    			</c:otherwise>
+                                    		</c:choose>
+                                    	</c:forEach>
+                                    	</p>
+                                    </div>
 							</content>
                         </div>
                     </div>

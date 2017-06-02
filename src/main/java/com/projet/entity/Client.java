@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.projet.entity.Counselor;
 
@@ -16,12 +17,16 @@ import com.projet.entity.Counselor;
 @Table(name="client")
 public class Client extends AbstractPerson {
 	
+	@NotNull
 	@Column(name="adress", nullable=false)
 	private String adress;
+	@NotNull
 	@Column(name="zipCode", nullable=false)
 	private String zipCode;
+	@NotNull
 	@Column(name="city", nullable=false)
 	private String city;
+	@NotNull
 	@Column(name="phoneNumber", nullable=false)
 	private String phoneNumber;
 	@OneToOne
@@ -30,6 +35,7 @@ public class Client extends AbstractPerson {
 	@OneToOne
 	@JoinColumn(name="currentAccount")
 	private CurrentAccount currentAccount;
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="counselor", nullable=false)
 	private Counselor counselor;
@@ -55,14 +61,30 @@ public class Client extends AbstractPerson {
 	public void setCounselor(Counselor counselor) { this.counselor = counselor; }
 	
 	/* Construtor */
-	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber,
-			Counselor counselor) {
+	public Client() { }
+	private Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber, Counselor counselor) {
 		super(firstName, lastName);
 		this.adress = adress;
 		this.zipCode = zipCode;
 		this.city = city;
 		this.phoneNumber = phoneNumber;
 		this.counselor = counselor;
+	}
+	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber, 
+			CurrentAccount currentAccount, Counselor counselor) {
+		this(firstName, lastName, adress, zipCode, city, phoneNumber, counselor);
+		this.currentAccount = currentAccount;
+	}
+	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber, 
+			SavingAccount savingAccount, Counselor counselor) {
+		this(firstName, lastName, adress, zipCode, city, phoneNumber, counselor);
+		this.savingAccount = savingAccount;
+	}
+	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber, 
+			SavingAccount savingAccount, CurrentAccount currentAccount, Counselor counselor) {
+		this(firstName, lastName, adress, zipCode, city, phoneNumber, counselor);
+		this.savingAccount = savingAccount;
+		this.currentAccount = currentAccount;
 	}
 	
 }

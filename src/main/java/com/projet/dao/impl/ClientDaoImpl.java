@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ import com.projet.dao.IClientDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 
+@Transactional
 @Repository
 public class ClientDaoImpl implements IClientDAO{
 
@@ -40,14 +42,14 @@ public class ClientDaoImpl implements IClientDAO{
 
 	@Override
 	public List<Client> findClientsByCounselor(Counselor counselor) {
-		TypedQuery<Client> q = em.createQuery("from client where counselor.login = :id", Client.class);
-		q.setParameter("id", counselor.getLogin());
+		TypedQuery<Client> q = em.createQuery("from Client where counselor = :c", Client.class);
+		q.setParameter("c", counselor);
 		return q.getResultList();
 	}
 
 	@Override
 	public List<Client> findClientsByNegativeSold() {
-		TypedQuery<Client> q = em.createQuery("from client where savingAccount.sold < 0 or currentAccount.sold < 0", Client.class);
+		TypedQuery<Client> q = em.createQuery("from Client where savingAccount.sold < 0 or currentAccount.sold < 0", Client.class);
 		return q.getResultList();
 	}
 
