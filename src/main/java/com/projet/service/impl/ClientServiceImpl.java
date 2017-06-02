@@ -39,7 +39,22 @@ public class ClientServiceImpl implements IClientService {
 	}
 
 	private void validate(Client client) throws ClientServiceException{
-		
+		if (client.getFirstName() == null || client.getFirstName().trim().length() == 0) {
+			throw new ClientServiceException ("firstName", "le prénom ne doit pas être nul");
+		}
+		if (client.getLastName() == null || client.getLastName().trim().length() == 0) {
+			throw new ClientServiceException ("lastName", "le prénom ne doit pas être nul");
+		}
+		if (client.getAdress() == null || client.getAdress().trim().length() == 0) {
+				throw new ClientServiceException ("adress", "le prénom ne doit pas être nul");
+		}
+		if (client.getZipCode() == null || client.getZipCode().trim().length() == 0) {
+			throw new ClientServiceException ("zipCode", "le prénom ne doit pas être nul");
+		}
+		if (client.getZipCode() == null || client.getZipCode().trim().length() == 0) {
+			throw new ClientServiceException ("zipCode", "le prénom ne doit pas être nul");
+		}
+			
 	}
 
 	
