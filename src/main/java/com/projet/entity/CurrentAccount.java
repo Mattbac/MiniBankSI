@@ -13,11 +13,18 @@ public class CurrentAccount extends AbstractAccount {
 	@Column(name="overdrawn", nullable=false)
 	private BigDecimal overdrawn;
 
-	public BigDecimal getOverdrawn() {
-		return overdrawn;
-	}
+	// Le decouvert autorise pour le compte, qui vaut 1000 par defaut
+	@Column(name="overdraft")
+	private BigDecimal overdraft = new BigDecimal(1000.00);
 
-	public void setOverdrawn(BigDecimal overdrawn) {
-		this.overdrawn = overdrawn;
-	}
+	
+	/* Getters */
+	public BigDecimal getOverdrawn() { return overdrawn; }
+	public BigDecimal getOverdraft() { return overdraft; }
+
+	
+	/* Setters */
+	public void setOverdrawn(BigDecimal overdrawn) { this.overdrawn = overdrawn; }
+	public void setOverdraft(BigDecimal overdraft) { this.overdraft = overdraft; }
+	
 }

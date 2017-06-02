@@ -15,10 +15,19 @@ public class Counselor extends User {
 	@JoinColumn(name="manager", nullable=false)
 	private Manager manager;
 
+	
 	/* Getter */
 	public Manager getManager() { return manager; }
 
+	
 	/* Setter */
 	public void setManager(Manager manager) { this.manager = manager; }
+	
+	
+	/* Constructor */
+	public Counselor(String login, String password, Role role_user, Manager manager) {
+		super(login, password, role_user);
+		this.manager = manager;
+	}
 		
 }
