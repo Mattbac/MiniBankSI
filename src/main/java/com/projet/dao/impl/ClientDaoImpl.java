@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ import com.projet.dao.IClientDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 
+@Transactional
 @Repository
 public class ClientDaoImpl implements IClientDAO{
 

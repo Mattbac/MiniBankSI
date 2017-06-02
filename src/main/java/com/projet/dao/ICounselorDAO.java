@@ -3,7 +3,6 @@ package com.projet.dao;
 import java.util.List;
 
 import com.projet.entity.Manager;
-import com.projet.entity.User;
 import com.projet.entity.Counselor;
 
 public interface ICounselorDAO {

@@ -28,7 +28,7 @@ public class User {
 	private Role role_user;
 	
 	@Column(name="user_enabled", nullable = false, columnDefinition = "BOOLEAN DEFAULT true")
-	private boolean enabled;
+	private boolean enabled = true;
 
 	
 	/* Getters */
@@ -36,10 +36,22 @@ public class User {
 	public String getPassword() { return password; }
 	public boolean isEnabled() { return enabled; }
 	public Role getRole_user() { return role_user; }
-		
+
+	
 	/* Setters */
 	public void setLogin(String login) { this.login = login; }
 	public void setPassword(String password) { this.password = password; }
 	public void setEnabled(boolean enabled) { this.enabled = enabled; }
 	public void setRole_user(Role role_user) { this.role_user = role_user; }
+	
+	
+	/* Constructor */
+	public User() { }
+	public User(String login, String password, Role role_user) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.role_user = role_user;
+	}
+	
 }

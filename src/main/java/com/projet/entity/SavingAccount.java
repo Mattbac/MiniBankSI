@@ -13,11 +13,11 @@ public class SavingAccount extends AbstractAccount {
 	@Column(name="remuneration_rate", nullable=false)
 	private BigDecimal remunerationRate;
 
-	public BigDecimal getRemunerationRate() {
-		return remunerationRate;
-	}
+	
+	/* Getter */
+	public BigDecimal getRemunerationRate() { return remunerationRate; }
 
-	public void setRemunerationRate(BigDecimal remunerationRate) {
-		this.remunerationRate = remunerationRate;
-	}
+	
+	/* Setter */
+	public void setRemunerationRate(BigDecimal remunerationRate) { this.remunerationRate = remunerationRate; }
 }

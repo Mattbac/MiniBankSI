@@ -5,8 +5,6 @@ import com.projet.entity.CurrentAccount;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -61,6 +59,18 @@ public class Client extends AbstractPerson {
 	public void setSavingAccount(SavingAccount savingAccount) { this.savingAccount = savingAccount; }
 	public void setCurrentAccount(CurrentAccount currentAccount) { this.currentAccount = currentAccount; }
 	public void setCounselor(Counselor counselor) { this.counselor = counselor; }
-
+	
+	/* Construtor */
+	public Client() { }
+	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber,
+			Counselor counselor) {
+		super(firstName, lastName);
+		this.adress = adress;
+		this.zipCode = zipCode;
+		this.city = city;
+		this.phoneNumber = phoneNumber;
+		this.counselor = counselor;
+	}
+	
 }
 

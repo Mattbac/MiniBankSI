@@ -26,24 +26,15 @@ public abstract class AbstractAccount {
 	private Date created;
 	
 	
-	public long getId() {
-		return id;
-	}
-	public BigDecimal getSold() {
-		return sold;
-	}
-	public Date getCreated() {
-		return created;
-	}
+	/* Getters */
+	public long getId() { return id; }
+	public BigDecimal getSold() { return sold; }
+	public Date getCreated() { return created; }
 	
 	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public void setSold(BigDecimal sold) {
-		this.sold = sold;
-	}
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+	/* Setters */
+	public void setId(Long id) { this.id = id; }
+	public void setSold(BigDecimal sold) { this.sold = sold; }
+	public void setCreated(Date created) { this.created = created; }
+	
 }

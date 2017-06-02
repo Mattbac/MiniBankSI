@@ -24,14 +24,23 @@ public abstract class AbstractPerson {
 	@Column(name="lastName", nullable=false)
 	private String lastName;
 	
+	
 	/* Getters */
 	public long getId() { return id; }
 	public String getFirstName() { return firstName; }
 	public String getLastName() { return lastName; }
 	
+	
 	/* Getters */
 	public void setId(long id) { this.id = id; }
 	public void setFirstName(String firstName) { this.firstName = firstName; }
 	public void setLastName(String lastName) { this.lastName = lastName; }
+
+	/* Constructor */
+	public AbstractPerson() { }
+	public AbstractPerson(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 }
