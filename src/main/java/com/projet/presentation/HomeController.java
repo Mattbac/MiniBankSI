@@ -2,6 +2,8 @@ package com.projet.presentation;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.projet.dao.ICounselorDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.service.IClientService;
@@ -22,6 +25,8 @@ public class HomeController {
 	
 	@Autowired
 	private IClientService clientServiceImpl;
+	@Autowired
+	private ICounselorDAO counselorDaoImpl;
 	
 	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String home() {
@@ -36,7 +41,7 @@ public class HomeController {
 
 
 	@GetMapping("/counselor/see/clients")
-	public ModelAndView listeClients(@RequestParam(required = false) Integer pageNumber) {
+	public ModelAndView listeClients(HttpSession session, @RequestParam(required = false) Integer pageNumber) {
 		Counselor counselor = null;
 		List<Client> clients = clientServiceImpl.getAllClientsByCounselor(counselor);
 		PagedListHolder<Client> page = new PagedListHolder<>(clients);
