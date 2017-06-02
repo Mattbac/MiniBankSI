@@ -2,7 +2,7 @@ package com.projet.dao;
 
 import com.projet.entity.SavingAccount;
 
-public interface ISavingAccountDao {
+public interface ISavingAccountDAO {
 
 	SavingAccount findAccountById(Long id);
 	

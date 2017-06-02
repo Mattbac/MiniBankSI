@@ -2,7 +2,7 @@ package com.projet.dao;
 
 import com.projet.entity.CurrentAccount;
 
-public interface ICurrentAccountDao {
+public interface ICurrentAccountDAO {
 
 	CurrentAccount findAccountById(Long id);
 	

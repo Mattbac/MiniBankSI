@@ -6,12 +6,12 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.projet.dao.ICurrentAccountDao;
+import com.projet.dao.ICurrentAccountDAO;
 import com.projet.entity.CurrentAccount;
 
 @Transactional
 @Repository
-public class CurrentAccountDaoImpl implements ICurrentAccountDao{
+public class CurrentAccountDaoImpl implements ICurrentAccountDAO{
 
 	@PersistenceContext
 	private EntityManager em;

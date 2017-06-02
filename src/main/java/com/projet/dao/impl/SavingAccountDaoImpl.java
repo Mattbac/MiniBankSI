@@ -5,11 +5,11 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
-import com.projet.dao.ISavingAccountDao;
+import com.projet.dao.ISavingAccountDAO;
 import com.projet.entity.SavingAccount;
 
 @Repository
-public class SavingAccountDaoImpl implements ISavingAccountDao {
+public class SavingAccountDaoImpl implements ISavingAccountDAO {
 
 	@PersistenceContext
 	private EntityManager em;

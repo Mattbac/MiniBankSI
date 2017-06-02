@@ -2,6 +2,7 @@ package com.projet.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -13,12 +14,13 @@ import com.projet.entity.Role;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="user")
-public class User extends AbstractPerson {
+public class User {
 	
-	@Column(name="user_login", unique = true, nullable=false, length=11)
+	@Id
+	@Column(name="user_login", unique = true, nullable=false, length=20)
 	private String login;
 	
-	@Column(name="user_password", nullable=false, length=11)
+	@Column(name="user_password", nullable=false, length=100)
 	private String password;
 	
 	@ManyToOne

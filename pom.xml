@@ -137,6 +137,13 @@
             <version>${spring.framework.version}</version>
         </dependency>
         
+        <!-- @Inject -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+        
         <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>

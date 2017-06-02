@@ -69,9 +69,9 @@
 	</bean>
 	
 	<!-- Encoder -->
-	<!--<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 		<constructor-arg value="12" />
-	</bean>-->
+	</bean>
 	
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/login" access="permitAll" />
@@ -84,13 +84,11 @@
 		<security:csrf disabled="true"/>
 	</security:http>
 	
+	<bean id="myUserDetailsService" class="com.projet.service.MyUserDetailsService"></bean>
+	
 	<security:authentication-manager>
-		<security:authentication-provider>
-<!-- 		<security:password-encoder ref="encoder" />  -->
-
-			<security:jdbc-user-service data-source-ref="dataSource" 
-				users-by-username-query="SELECT user_login, user_password, user_enabled FROM user WHERE user_login = ?" 
-				authorities-by-username-query="SELECT user.user_login, role.role_name FROM user, role WHERE user_login = ?" />
+		<security:authentication-provider user-service-ref="myUserDetailsService">
+			<security:password-encoder ref="encoder"></security:password-encoder>
 		</security:authentication-provider>
 	</security:authentication-manager>
 	

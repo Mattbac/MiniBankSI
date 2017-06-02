@@ -1,11 +1,9 @@
 package com.projet.presentation;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projet.dao.ICounselorDAO;
-import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.service.IClientService;
+import com.projet.service.UserSecurity;
 
 @Controller
 public class HomeController {
@@ -35,7 +33,11 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/counselor"}, method = RequestMethod.GET)
 	public String dashboardcounselor() {
+		
+		UserSecurity userDetails = (UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+		System.out.println(userDetails.getCouselor().getManager().getAgencyName());
+		
 		return "dashboard";
 	}
 
@@ -43,15 +45,15 @@ public class HomeController {
 	@GetMapping("/counselor/see/clients")
 	public ModelAndView listeClients(HttpSession session, @RequestParam(required = false) Integer pageNumber) {
 		Counselor counselor = null;
-		List<Client> clients = clientServiceImpl.getAllClientsByCounselor(counselor);
-		PagedListHolder<Client> page = new PagedListHolder<>(clients);
-		page.setPageSize(CLIENTS_PER_PAGE);
+//		List<Client> clients = clientServiceImpl.getAllClientsByCounselor(counselor);
+//		PagedListHolder<Client> page = new PagedListHolder<>(clients);
+//		page.setPageSize(CLIENTS_PER_PAGE);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("liste-clients");
-		mav.addObject("maxPages", page.getPageCount());
-		page.setPage(pageNumber == null || pageNumber.equals(0) ? 0 : pageNumber - 1 );
-		mav.addObject("currentPage", page.getPage());
-		mav.addObject("clients", page.getPageList());
+//		mav.setViewName("liste-clients");
+//		mav.addObject("maxPages", page.getPageCount());
+//		page.setPage(pageNumber == null || pageNumber.equals(0) ? 0 : pageNumber - 1 );
+//		mav.addObject("currentPage", page.getPage());
+//		mav.addObject("clients", page.getPageList());
 		return mav;
 	}
 	
