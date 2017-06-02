@@ -42,8 +42,8 @@ public class ClientDaoImpl implements IClientDAO{
 
 	@Override
 	public List<Client> findClientsByCounselor(Counselor counselor) {
-		TypedQuery<Client> q = em.createQuery("from client where counselor.login = :id", Client.class);
-		q.setParameter("id", counselor.getLogin());
+		TypedQuery<Client> q = em.createQuery("from Client where counselor = :c", Client.class);
+		q.setParameter("c", counselor);
 		return q.getResultList();
 	}
 
