@@ -8,4 +8,5 @@ import com.projet.entity.Counselor;
 public interface ICounselorDAO {
 
 	public List<Counselor> findCounselorsByManager(Manager manager);
+	public void createCounselor(Counselor counselor);
 }
