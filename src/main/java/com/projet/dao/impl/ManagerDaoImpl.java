@@ -21,4 +21,9 @@ public class ManagerDaoImpl implements IManagerDAO {
 		em.persist(manager);
 	}
 
+	@Override
+	public Manager findByLogin(String login) {
+		return em.find(Manager.class, login);
+	}
+
 }

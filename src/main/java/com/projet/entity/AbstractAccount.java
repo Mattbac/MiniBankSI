@@ -37,4 +37,16 @@ public abstract class AbstractAccount {
 	public void setSold(BigDecimal sold) { this.sold = sold; }
 	public void setCreated(Date created) { this.created = created; }
 	
+	
+	/* Constructor */
+	public AbstractAccount() {
+		this.sold = new BigDecimal(0);
+		this.created = new Date();
+	}
+	public AbstractAccount(BigDecimal sold) {
+		this.sold = sold;
+		this.created = new Date();
+	}
+	
+	
 }

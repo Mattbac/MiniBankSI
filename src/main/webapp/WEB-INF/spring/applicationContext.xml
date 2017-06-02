@@ -81,7 +81,7 @@
 		<security:form-login
 		  login-page='/login'
 		  login-processing-url="/login"
-		  authentication-failure-url="/login.html?error=true"/>
+		  authentication-failure-url="/login?error=true"/>
 		<security:csrf disabled="true"/>
 	</security:http>
 	
