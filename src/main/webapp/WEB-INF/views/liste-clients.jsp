@@ -56,6 +56,20 @@
                                             </c:forEach>
                                        </tbody>
                                     </table>
+                                    <div>
+                                    	<p>
+                                    	<c:forEach begin="1" end="${maxPages}" step="1" var="nPage">
+                                    		<c:choose>
+                                    			<c:when test="${nPage != currentPage + 1}">
+                                    				<a href="clients?pageNumber=${nPage}">${nPage}</a>
+                                    			</c:when>
+                                    			<c:otherwise>
+                                    				<span>${nPage}</span>
+                                    			</c:otherwise>
+                                    		</c:choose>
+                                    	</c:forEach>
+                                    	</p>
+                                    </div>
 							</content>
                         </div>
                     </div>

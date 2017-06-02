@@ -36,7 +36,7 @@ import com.projet.service.UserSecurity;
 @Controller
 public class HomeController {
 
-	final int CLIENTS_PER_PAGE = 5;
+	final int CLIENTS_PER_PAGE = 2;
 	
 	@Autowired
 	private IRoleDAO roleDaoImpl;

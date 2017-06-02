@@ -56,7 +56,7 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+<!-- 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/> -->
 
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
