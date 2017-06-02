@@ -1,15 +1,16 @@
-.logo {
-	height: 61px;
+.wrapper.login {
+    background-color: #1F77D0;
+    min-height: 100vh;
 }
 
-.navbar {
-	height: 61px;
+.full-page {
+    padding-top: 100px;    
 }
 
-.content {
-	height: 100%;
+.card.login {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-
 
 .btn-post-action.btn-simple.btn-icon {
     padding: 0 8px;
