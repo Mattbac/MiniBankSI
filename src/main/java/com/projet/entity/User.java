@@ -43,4 +43,14 @@ public class User {
 	public void setPassword(String password) { this.password = password; }
 	public void setEnabled(boolean enabled) { this.enabled = enabled; }
 	public void setRole_user(Role role_user) { this.role_user = role_user; }
+	
+	
+	/* Constructor */
+	public User(String login, String password, Role role_user) {
+		super();
+		this.login = login;
+		this.password = password;
+		this.role_user = role_user;
+	}
+	
 }

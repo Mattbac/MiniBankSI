@@ -35,5 +35,11 @@ public abstract class AbstractPerson {
 	public void setId(long id) { this.id = id; }
 	public void setFirstName(String firstName) { this.firstName = firstName; }
 	public void setLastName(String lastName) { this.lastName = lastName; }
+
+	/* Constructor */
+	public AbstractPerson(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 	
 }

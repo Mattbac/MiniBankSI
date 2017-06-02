@@ -19,4 +19,10 @@ public class Manager extends User {
 	/* Setter */
 	public void setAgencyName(String agencyName) { this.agencyName = agencyName; }
 	
+	
+	/* Constructor */
+	public Manager(String login, String password, Role role_user, String agencyName) {
+		super(login, password, role_user);
+		this.agencyName = agencyName;		
+	}
 }
