@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.projet.entity.Counselor;
 
@@ -18,12 +19,16 @@ import com.projet.entity.Counselor;
 @Table(name="client")
 public class Client extends AbstractPerson {
 	
+	@NotNull
 	@Column(name="adress", nullable=false)
 	private String adress;
+	@NotNull
 	@Column(name="zipCode", nullable=false)
 	private String zipCode;
+	@NotNull
 	@Column(name="city", nullable=false)
 	private String city;
+	@NotNull
 	@Column(name="phoneNumber", nullable=false)
 	private String phoneNumber;
 	@OneToOne
@@ -32,6 +37,7 @@ public class Client extends AbstractPerson {
 	@OneToOne
 	@JoinColumn(name="currentAccount")
 	private CurrentAccount currentAccount;
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name="counselor", nullable=false)
 	private Counselor counselor;
