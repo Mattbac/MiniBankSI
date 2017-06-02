@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.projet.dao.ICounselorDAO;
+import com.projet.dao.IManagerDAO;
+import com.projet.dao.IRoleDAO;
+import com.projet.dao.IClientDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.entity.CurrentAccount;
@@ -27,35 +30,50 @@ public class HomeController {
 	final int CLIENTS_PER_PAGE = 5;
 	
 	@Autowired
-	private IClientService clientServiceImpl;
+	private IRoleDAO roleDaoImpl;
+	@Autowired
+	private IClientDAO clientDaoImpl;
+	@Autowired
+	private IManagerDAO managerDaoImpl;
 	@Autowired
 	private ICounselorDAO counselorDaoImpl;
+	
+	@Autowired
+	private IClientService clientServiceImpl;
 	
 	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
 	public String home() {
 		
-		Role rc = new Role("ROLE_counselor");
+		/*Role rc = new Role("ROLE_counselor");
+		roleDaoImpl.create(rc);
 		Role rm = new Role("ROLE_manager");
+		roleDaoImpl.create(rm);
+		
+		int counselor = 0;
 		
 		for(int i = 0; i < 2 ;i++){
 			Manager m = new Manager("manager"+i, "manager"+i, rm, "Agency "+i);
-			
+			managerDaoImpl.create(m);
+
 			int g = (int) Math.floor((Math.random() * 5) + 3);
 			
 			for(int j = 0; j < g ;j++){
-				Counselor c = new Counselor("counselor"+j, "counselor"+j, rc, m);
+				Counselor c = new Counselor("counselor"+counselor, "counselor"+counselor, rc, m);
+				counselor++;
+				counselorDaoImpl.createCounselor(c);
 				
 				int r = (int) Math.floor((Math.random() * 9) + 1);
 				
 				for(int k = 0; k < r ;k++){
 					
-					/*CurrentAccount current = new CurrentAccount();
-					SavingAccount saving = new SavingAccount();*/
+//					CurrentAccount current = new CurrentAccount();
+//					SavingAccount saving = new SavingAccount();
 					
 					Client ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", c);
+					clientDaoImpl.createClient(ct);
 				}
 			}
-		}
+		}*/
 		
 		return "home";
 	}

@@ -21,6 +21,7 @@ public class Manager extends User {
 	
 	
 	/* Constructor */
+	public Manager() { }
 	public Manager(String login, String password, Role role_user, String agencyName) {
 		super(login, password, role_user);
 		this.agencyName = agencyName;		

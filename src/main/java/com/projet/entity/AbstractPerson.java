@@ -37,6 +37,7 @@ public abstract class AbstractPerson {
 	public void setLastName(String lastName) { this.lastName = lastName; }
 
 	/* Constructor */
+	public AbstractPerson() { }
 	public AbstractPerson(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;

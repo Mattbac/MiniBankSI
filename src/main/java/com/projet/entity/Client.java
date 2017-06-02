@@ -55,6 +55,7 @@ public class Client extends AbstractPerson {
 	public void setCounselor(Counselor counselor) { this.counselor = counselor; }
 	
 	/* Construtor */
+	public Client() { }
 	public Client(String firstName, String lastName, String adress, String zipCode, String city, String phoneNumber,
 			Counselor counselor) {
 		super(firstName, lastName);
