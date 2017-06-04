@@ -1,0 +1,9 @@
+<nav class="navbar navbar-default navbar-fixed">
+
+	<div class="container-fluid">
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="<%=request.getContextPath()%>/logout">Déconnexion</a></li>
+		</ul>
+	</div>
+
+</nav>

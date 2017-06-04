@@ -1,20 +1,25 @@
 <div class="sidebar" data-color="blue">
 
 	<div class="sidebar-wrapper">
-		<div class="logo"></div>
+		<div class="logo">
+			<a href="<%=request.getContextPath()%>" class="simple-text">Mini Bank SI</a>
+		</div>
 
 		<ul class="nav">
-			<li><a href="index.html"> <i class="pe-7s-graph"></i>
+			<li class="active"><a href="<%=request.getContextPath()%>/"> <i class="pe-7s-graph"></i>
 					<p>Tableau de bord</p>
 			</a></li>
-			<li class="active"><a href="posts.html"> <i
-					class="pe-7s-note"></i>
-					<p>Gerants</p>
+			<li><a href="<%=request.getContextPath()%>/see/clients"> <i class="pe-7s-menu"></i>
+					<p>Liste des clients</p>
 			</a></li>
-			<li><a href="pages.html"> <i class="pe-7s-file"></i>
-					<p>Clients</p>
+			<li><a href="<%=request.getContextPath()%>/recherche"> <i
+					class="pe-7s-search"></i>
+					<p>Recherche</p>
 			</a></li>
-			<li><a href="profil.html"> <i class="pe-7s-user"></i>
+			<li><a href="<%=request.getContextPath()%>/transfert"> <i class="pe-7s-cash"></i>
+					<p>Transfert</p>
+			</a></li>
+			<li><a href="<%=request.getContextPath()%>/options"> <i class="pe-7s-config"></i>
 					<p>Options</p>
 			</a></li>
 		</ul>

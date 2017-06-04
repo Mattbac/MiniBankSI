@@ -33,6 +33,8 @@ import com.projet.entity.CurrentAccount;
 import com.projet.entity.Manager;
 import com.projet.entity.Role;
 import com.projet.entity.SavingAccount;
+import com.projet.entity.User;
+import com.projet.service.AbstractAccountService;
 import com.projet.service.IClientService;
 import com.projet.service.UserSecurity;
 
@@ -53,13 +55,15 @@ public class HomeController {
 	private ICurrentAccountDAO currentAccountDaoImpl;
 	@Autowired
 	private ISavingAccountDAO savingAccountDaoImpl;
-	
+	@Autowired
+	private AbstractAccountService abstractAccountService;
 	@Autowired
 	private IClientService clientServiceImpl;
 	
-	@RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/home", "/dashboard"}, method = RequestMethod.GET)
 	public String home() {
 		
+		/*
 		Role rc = new Role("ROLE_counselor");
 		roleDaoImpl.create(rc);
 		Role rm = new Role("ROLE_manager");
@@ -78,53 +82,63 @@ public class HomeController {
 				counselor++;
 				counselorDaoImpl.createCounselor(c);
 				
-				int r = (int) Math.floor((Math.random() * 9) + 1);
+				int r = (int) Math.floor((Math.random() * 9) + 10);
 				
 				for(int k = 0; k < r ;k++){
 					
 					CurrentAccount current = null;
 					SavingAccount saving = null;
 					
-					if( Math.floor((Math.random() * 10)) < 5){
+//					if( Math.floor((Math.random() * 10)) < 5){
 						current = new CurrentAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
 						currentAccountDaoImpl.createAccount(current);
-						
-					}
+//					}
 					
-					if( current == null || Math.floor((Math.random() * 10)) < 5){
+//					if( current == null || Math.floor((Math.random() * 10)) < 5){
 						saving = new SavingAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
 						savingAccountDaoImpl.createAccount(saving);
-					}
+//					}
 					
 					Client ct = null;
 					
 					if(current != null && saving != null){
 						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", saving, current, c);
-					}else if(current != null) {
-						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", current, c);
-					}else if(saving != null){
-						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", saving, c);
+//					}else if(current != null) {
+//						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", current, c);
+//					}else if(saving != null){
+//						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", saving, c);
 					}
 					clientDaoImpl.createClient(ct);
 				}
 			}
 		}
+		*/
 		
-		return "home";
-	}
-	
-	@RequestMapping(value = {"/counselor"}, method = RequestMethod.GET)
-	public String dashboardcounselor() {
+		Client c1 = clientDaoImpl.findClientById((long) 3);
+		Client c2 = clientDaoImpl.findClientById((long) 2);
 		
-		UserSecurity userDetails = (UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println(c1.getSavingAccount().getSold());
+		System.out.println(c2.getSavingAccount().getSold());
+		
+		abstractAccountService.virement(c1.getSavingAccount(), c2.getSavingAccount(), new BigDecimal(300));
+		
+		System.out.println(c1.getSavingAccount().getSold());
+		System.out.println(c2.getSavingAccount().getSold());
 
-		System.out.println(userDetails.getCouselor().getManager().getAgencyName());
 		
+		User user = new User();
+		if (((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor() != null) {
+			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
+		} else {
+			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getManager();			
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("user", user);
+		System.out.println(user.toString());
 		return "dashboard";
 	}
-
-
-	@GetMapping("/counselor/see/clients")
+	
+	@GetMapping("/see/clients")
 	public ModelAndView listeClients(HttpSession session, @RequestParam(required = false) Integer pageNumber) {
 		Counselor counselor = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
 		List<Client> clients = clientServiceImpl.getAllClientsByCounselor(counselor);
@@ -139,7 +153,7 @@ public class HomeController {
 		return mav;
 	}
 	
-	@GetMapping("/counselor/see/client/{id}")
+	@GetMapping("/see/client/{id}")
 	public ModelAndView seeClient(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("client", clientServiceImpl.findById(id));
@@ -147,22 +161,22 @@ public class HomeController {
 		return mav;
 	}
 	
-	@PostMapping("/counselor/see/client/{id}")
+	@PostMapping("/see/client/{id}")
 	public String modifyClient (@Valid @ModelAttribute("client") Client client, BindingResult result) {
 		if (result.hasErrors()) {
-			return "counselor/see/client";
+			return "see/client";
 		}
 		try {
 			clientServiceImpl.update(client);
-			return "redirect:/counselor/see/clients";
+			return "redirect:/see/clients";
 		}
 		catch (ClientServiceException e) {
 			result.rejectValue(e.getChamp(), e.getChamp(), e.getMessage());
-			return "counselor/see/client";
+			return "see/client";
 		}
 	}
 	
-	@GetMapping("/counselor/create/client")
+	@GetMapping("/create/client")
 	public ModelAndView createClientOut(){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("client", new Client());
@@ -170,29 +184,38 @@ public class HomeController {
 		return mav;
 	}
 	
-	@PostMapping("/counselor/create/client")
+	@PostMapping("/create/client")
 	public String createClientIn(@Valid @ModelAttribute("client") Client client, BindingResult result) {
 		if (result.hasErrors()) {
-			return "counselor/create/client";
+			return "create/client";
 		}
 		try {
 			clientServiceImpl.update(client);
-			return "redirect:/counselor/see/clients";
+			return "redirect:/see/clients";
 		}
 		catch (ClientServiceException e) {
 			result.rejectValue(e.getChamp(), e.getChamp(), e.getMessage());
-			return "counselor/create/client";
+			return "create/client";
 		}
-	}
-	
-	@RequestMapping(value = {"/manager"}, method = RequestMethod.GET)
-	public String dashboardmanager() {
-
-		return "dashboard";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 		return "login";
+	}
+
+	@RequestMapping(value = {"/recherche", "/search"}, method = RequestMethod.GET)
+	public String search() {
+		return "search";
+	}
+	
+	@RequestMapping(value = {"/transfert", "/virement"}, method = RequestMethod.GET)
+	public String transfert() {
+		return "transfert";
+	}
+	
+	@RequestMapping(value = "/options", method = RequestMethod.GET)
+	public String options() {
+		return "options";
 	}
 }

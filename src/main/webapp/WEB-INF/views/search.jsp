@@ -15,7 +15,7 @@
                       <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="col-md-10 title">Virement bancaire</h4>
+                                <h4 class="col-md-10 title">Recherche</h4>
                             </div>
                             
                             <div class="content">

@@ -76,8 +76,7 @@
 	
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/login" access="permitAll" />
-		<security:intercept-url pattern="/counselor*" access="hasAnyRole('counselor', 'manager')" />
-		<security:intercept-url pattern="/manager*" access="hasAnyRole('manager')" />
+		<security:intercept-url pattern="/*" access="hasAnyRole('counselor', 'manager')" />
 		<security:form-login
 		  login-page='/login'
 		  login-processing-url="/login"

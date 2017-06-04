@@ -33,7 +33,7 @@ public class Counselor extends User {
 
 	@Override
 	public String toString() {
-		return "Counselor [manager=" + manager + "]";
+		return super.toString() + "Counselor [manager=" + manager + "]";
 	}
 		
 }
