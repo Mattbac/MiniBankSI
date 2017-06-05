@@ -4,6 +4,5 @@ import com.projet.entity.AbstractAccount;
 
 public interface IAbstractAccountDAO {
 
-	void updateAccount(AbstractAccount account);
-
+	public void updateAccount(AbstractAccount account);
 }

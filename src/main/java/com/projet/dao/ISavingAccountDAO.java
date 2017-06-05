@@ -4,8 +4,8 @@ import com.projet.entity.SavingAccount;
 
 public interface ISavingAccountDAO {
 
-	SavingAccount findAccountById(Long id);
-	void createAccount(SavingAccount account);
-	void updateAccount(SavingAccount account);
-	void deleteAccount(SavingAccount account);
+	public SavingAccount findAccountById(Long id);
+	public void createAccount(SavingAccount account);
+	public void updateAccount(SavingAccount account);
+	public void deleteAccount(SavingAccount account);
 }

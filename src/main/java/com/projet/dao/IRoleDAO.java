@@ -4,5 +4,5 @@ import com.projet.entity.Role;
 
 public interface IRoleDAO {
 	
-	void create(Role role);
+	public void create(Role role);
 }

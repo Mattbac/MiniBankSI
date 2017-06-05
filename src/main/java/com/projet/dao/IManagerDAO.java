@@ -4,6 +4,6 @@ import com.projet.entity.Manager;
 
 public interface IManagerDAO {
 	
-	void create(Manager manager);
-	Manager findByLogin(String login);
+	public void create(Manager manager);
+	public Manager findByLogin(String login);
 }
