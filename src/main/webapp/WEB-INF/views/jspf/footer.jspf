@@ -11,7 +11,7 @@
 	<!--  Charts Plugin -->
 	<script src="<%=request.getContextPath()%>/assets/common/js/chartist.min.js"></script>
 	
-	<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="<%=request.getContextPath()%>/assets/common/js/light-bootstrap-dashboard.js"></script>
+	<!-- My script -->
+	<script src="<%=request.getContextPath()%>/assets/common/js/script.js"></script>
 
 </html>

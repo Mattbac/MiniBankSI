@@ -53,9 +53,7 @@ public class ClientServiceImpl implements IClientService {
 		}
 		if (client.getZipCode() == null || client.getZipCode().trim().length() == 0) {
 			throw new ClientServiceException ("zipCode", "le prénom ne doit pas être nul");
-		}
-			
+		}		
 	}
-
 	
 }

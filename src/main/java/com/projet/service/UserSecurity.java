@@ -10,6 +10,7 @@ import com.projet.entity.Manager;
 
 public class UserSecurity extends User {
 
+	private static final long serialVersionUID = 7197911000941494240L;
 	private Counselor couselor = null;
 	private Manager manager = null;
 	
