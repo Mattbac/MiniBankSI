@@ -81,19 +81,31 @@
 								<br />
                                 <h4 class="title text-info">Comptes bancaires</h4>
                                     <div class="row">
-                                        <div class="col-md-3">
-                                                <p>Compte courant</p>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Numéro de compte courant</label>
+                                                <p><c:out value="${client.currentAccount.accountNumber}"/></p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Solde</label>
                                                 <p><c:out value="${client.currentAccount.sold}"/> Euros</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-3">
-                                                <p>Compte épargne</p>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Numéro de compte épargne</label>
+                                                <p><c:out value="${client.savingAccount.accountNumber}"/></p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Solde</label>
                                                 <p><c:out value="${client.savingAccount.sold}"/> Euros</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>

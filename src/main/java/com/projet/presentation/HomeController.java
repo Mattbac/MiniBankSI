@@ -62,68 +62,17 @@ public class HomeController {
 	
 	@RequestMapping(value = {"/", "/home", "/dashboard"}, method = RequestMethod.GET)
 	public String home() {
-		
-		/*
-		Role rc = new Role("ROLE_counselor");
-		roleDaoImpl.create(rc);
-		Role rm = new Role("ROLE_manager");
-		roleDaoImpl.create(rm);
-		
-		int counselor = 0;
-		
-		for(int i = 0; i < 2 ;i++){
-			Manager m = new Manager("manager"+i, "manager"+i, rm, "Agency "+i);
-			managerDaoImpl.create(m);
 
-			int g = (int) Math.floor((Math.random() * 5) + 3);
-			
-			for(int j = 0; j < g ;j++){
-				Counselor c = new Counselor("counselor"+counselor, "counselor"+counselor, rc, m);
-				counselor++;
-				counselorDaoImpl.createCounselor(c);
-				
-				int r = (int) Math.floor((Math.random() * 9) + 10);
-				
-				for(int k = 0; k < r ;k++){
-					
-					CurrentAccount current = null;
-					SavingAccount saving = null;
-					
-//					if( Math.floor((Math.random() * 10)) < 5){
-						current = new CurrentAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
-						currentAccountDaoImpl.createAccount(current);
-//					}
-					
-//					if( current == null || Math.floor((Math.random() * 10)) < 5){
-						saving = new SavingAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
-						savingAccountDaoImpl.createAccount(saving);
-//					}
-					
-					Client ct = null;
-					
-					if(current != null && saving != null){
-						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", saving, current, c);
-//					}else if(current != null) {
-//						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", current, c);
-//					}else if(saving != null){
-//						ct = new Client("firstname"+k, "lastname"+k, "adress", "zipcode", "city", "phonenumber", saving, c);
-					}
-					clientDaoImpl.createClient(ct);
-				}
-			}
-		}
-		*/
-		
-		Client c1 = clientDaoImpl.findClientById((long) 3);
-		Client c2 = clientDaoImpl.findClientById((long) 2);
-		
-		System.out.println(c1.getSavingAccount().getSold());
-		System.out.println(c2.getSavingAccount().getSold());
-		
-		abstractAccountService.virement(c1.getSavingAccount(), c2.getSavingAccount(), new BigDecimal(300));
-		
-		System.out.println(c1.getSavingAccount().getSold());
-		System.out.println(c2.getSavingAccount().getSold());
+//		Client c1 = clientDaoImpl.findClientById((long) 3);
+//		Client c2 = clientDaoImpl.findClientById((long) 2);
+//		
+//		System.out.println(c1.getSavingAccount().getSold());
+//		System.out.println(c2.getSavingAccount().getSold());
+//		
+//		abstractAccountService.virement(c1.getSavingAccount(), c2.getSavingAccount(), new BigDecimal(300));
+//		
+//		System.out.println(c1.getSavingAccount().getSold());
+//		System.out.println(c2.getSavingAccount().getSold());
 
 		
 		User user = new User();
@@ -201,6 +150,57 @@ public class HomeController {
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
+
+		/*
+		Role rc = new Role("ROLE_counselor");
+		roleDaoImpl.create(rc);
+		Role rm = new Role("ROLE_manager");
+		roleDaoImpl.create(rm);
+		
+		int counselor = 0;
+		
+		for(int i = 0; i < 2 ;i++){
+			Manager m = new Manager("manager"+i, "manager"+i, rm, "Agency "+i);
+			managerDaoImpl.create(m);
+
+			int g = (int) Math.floor((Math.random() * 5) + 3);
+			
+			for(int j = 0; j < g ;j++){
+				Counselor c = new Counselor("counselor"+counselor, "counselor"+counselor, rc, m);
+				counselor++;
+				counselorDaoImpl.createCounselor(c);
+				
+				int r = (int) Math.floor((Math.random() * 9) + 10);
+				
+				for(int k = 0; k < r ;k++){
+					
+					CurrentAccount current = null;
+					SavingAccount saving = null;
+					
+//					if( Math.floor((Math.random() * 10)) < 5){
+						current = new CurrentAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
+						currentAccountDaoImpl.createAccount(current);
+//					}
+					
+//					if( current == null || Math.floor((Math.random() * 10)) < 5){
+						saving = new SavingAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
+						savingAccountDaoImpl.createAccount(saving);
+//					}
+					
+					Client ct = null;
+					
+					if(current != null && saving != null){
+						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), saving, current, c);
+//					}else if(current != null) {
+//						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), current, c);
+//					}else if(saving != null){
+//						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), saving, c);
+					}
+					clientDaoImpl.createClient(ct);
+				}
+			}
+		}
+		*/
 		return "login";
 	}
 

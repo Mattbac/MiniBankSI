@@ -13,7 +13,7 @@ public class ManagerDaoImplTest {
 
 	@Test
 	public final void testFindByLogin() {
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); // TODO		
 	}
 
 }

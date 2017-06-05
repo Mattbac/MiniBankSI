@@ -12,13 +12,13 @@
                                 <div class="content">
                                 
                                 	<c:if test="${param.error}">
-					                	<div class="alert alert-error">    
-					                    	Invalid username and password.
+					                	<div class="form-group text-danger">    
+					                    	Login et password invalides.
 					                	</div>
 					                </c:if>
 					                <c:if test="${param.logout}">
-					                	<div class="alert alert-success">    
-					                    	You have been logged out.
+					                	<div class="form-group text-success">    
+					                    	Vous avez été déconnecté.
 					                	</div>
 					                </c:if>
                                 

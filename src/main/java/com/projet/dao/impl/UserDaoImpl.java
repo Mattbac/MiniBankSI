@@ -16,7 +16,7 @@ import com.projet.entity.User;
 
 @Repository
 @Transactional
-public class UserDaoImpl implements IUserDAO{
+public class UserDaoImpl implements IUserDAO {
 
 	@PersistenceContext
 	private EntityManager em;
