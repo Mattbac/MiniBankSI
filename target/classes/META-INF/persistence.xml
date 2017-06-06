@@ -14,6 +14,7 @@
 		<class>com.projet.entity.SavingAccount</class>
 		<class>com.projet.entity.CurrentAccount</class>
 		<class>com.projet.entity.Role</class>
+		<class>com.projet.entity.TransactionHistory</class>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

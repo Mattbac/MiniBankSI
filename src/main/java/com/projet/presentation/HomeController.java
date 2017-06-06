@@ -120,18 +120,22 @@ public class HomeController {
 	}
 	
 	@PostMapping("/modify/client/{id}")
-	public ModelAndView modifyClient (@Valid @ModelAttribute("client") Client clientForm, BindingResult result, @PathVariable Long id) {
+	@Valid
+	public ModelAndView modifyClient (@ModelAttribute("client") Client clientForm, BindingResult result, @PathVariable Long id) {
 		ModelAndView mav = new ModelAndView();
 		
 		if (result.hasErrors()) {
+			System.out.println(result.toString());
 			mav.setViewName("edit-client");
 			return mav;
 		}
 		try {
+			System.out.println("update");
 			clientServiceImpl.update(clientForm, id);
 			return new ModelAndView("redirect:/see/client/"+id);
 		}
 		catch (ClientServiceException e) {
+			System.out.println("update error");
 			result.rejectValue(e.getChamp(), e.getChamp(), e.getMessage());
 			mav.setViewName("edit-client");
 			return mav;
@@ -147,7 +151,8 @@ public class HomeController {
 	}
 	
 	@PostMapping("/create/client")
-	public ModelAndView createClientIn(@Valid @ModelAttribute("client") Client client, BindingResult result, @RequestParam(required = false) boolean saving, @RequestParam(required = false) boolean current) {
+//	@Valid
+	public ModelAndView createClientIn(@ModelAttribute("client") Client client, BindingResult result, @RequestParam(required = false) boolean saving, @RequestParam(required = false) boolean current) {
 		ModelAndView mav = new ModelAndView();
 		
 		if (result.hasErrors()) {
@@ -238,8 +243,7 @@ public class HomeController {
 					clientDaoImpl.createClient(ct);
 				}
 			}
-		}
-		*/
+		}*/
 		return "login";
 	}
 
