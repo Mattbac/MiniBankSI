@@ -1,7 +1,10 @@
 package com.projet.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -19,5 +22,11 @@ public class RoleDaoImpl implements IRoleDAO {
 	@Override
 	public void create(Role role) {
 		em.persist(role);
+	}
+
+	@Override
+	public List<Role> get() {
+		TypedQuery<Role> q = em.createQuery("from Role", Role.class);
+		return q.getResultList();
 	}
 }

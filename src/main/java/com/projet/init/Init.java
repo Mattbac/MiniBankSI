@@ -1,4 +1,4 @@
-package com.project.init;
+package com.projet.init;
 
 import java.math.BigDecimal;
 
@@ -19,7 +19,7 @@ import com.projet.entity.Role;
 import com.projet.entity.SavingAccount;
 
 @Service
-public class Init {
+public class Init implements IInit {
 	
 	@Autowired
 	private IRoleDAO roleDaoImpl;
@@ -34,7 +34,13 @@ public class Init {
 	@Autowired
 	private IClientDAO clientDaoImpl;
 
+	@Override
 	public void initialize () {
+		
+		if(roleDaoImpl.get() != null) {
+			return;
+		}
+		
 		Role rc = new Role("ROLE_counselor");
 		roleDaoImpl.create(rc);
 		Role rm = new Role("ROLE_manager");
@@ -61,12 +67,12 @@ public class Init {
 					SavingAccount saving = null;
 					
 					if( Math.floor((Math.random() * 10)) < 5){
-						current = new CurrentAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
+						current = new CurrentAccount(new BigDecimal(Math.floor((Math.random() * 10000))-1000));
 						currentAccountDaoImpl.createAccount(current);
 					}
 					
 					if( current == null || Math.floor((Math.random() * 10)) < 5){
-						saving = new SavingAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
+						saving = new SavingAccount(new BigDecimal(Math.floor((Math.random() * 600000))));
 						savingAccountDaoImpl.createAccount(saving);
 					}
 					

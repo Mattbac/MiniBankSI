@@ -148,7 +148,7 @@
 										<div class="row">
 											<div class="col-md-2 col-md-push-10">
 												<div class="form-group">
-													<a class="btn btn-danger btn-fill btn-wd" href="<%=request.getContextPath()%>/delete/client">Supprimer le client</a>
+													<a class="btn btn-danger btn-fill btn-wd" href="<%=request.getContextPath()%>/delete/client/${client.id}">Supprimer le client</a>
 												</div>
 											</div>
 										</div>

@@ -17,7 +17,7 @@ import com.projet.entity.Counselor;
 @Table(name="client")
 public class Client extends AbstractPerson {
 	
-	@Pattern(regexp="[0-9]{1,} [a-zA-Z]{3,}", message="invalid adress")
+	@Pattern(regexp="[0-9]{1,} [ a-zA-Z]{3,}", message="invalid adress")
 	@Column(name="adress", nullable=false)
 	private String adress;
 	@Pattern(regexp="[0-9]{2} ?[0-9]{3}", message="invalid zipCode")

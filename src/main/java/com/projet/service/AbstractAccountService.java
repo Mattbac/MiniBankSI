@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.projet.entity.AbstractAccount;
 import com.projet.entity.CurrentAccount;
@@ -14,7 +14,7 @@ import com.projet.exception.virementException;
 import com.projet.dao.IAbstractAccountDAO;
 import com.projet.dao.ITransactionHistoryDAO;
 
-@Repository
+@Service
 public class AbstractAccountService {
 
 	@Autowired

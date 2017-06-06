@@ -26,10 +26,10 @@ import com.projet.dao.ICounselorDAO;
 import com.projet.dao.ICurrentAccountDAO;
 import com.projet.exception.ClientServiceException;
 import com.projet.exception.virementException;
+import com.projet.init.IInit;
 import com.projet.dao.IManagerDAO;
 import com.projet.dao.IRoleDAO;
 import com.projet.dao.ISavingAccountDAO;
-import com.project.init.Init;
 import com.projet.dao.IAbstractAccountDAO;
 import com.projet.dao.ITransactionHistoryDAO;
 import com.projet.dao.IClientDAO;
@@ -48,28 +48,14 @@ import com.projet.service.UserSecurity;
 @Controller
 public class HomeController {
 
-	final int CLIENTS_PER_PAGE = 4;
+	final int CLIENTS_PER_PAGE = 5;
 	
-	@Autowired
-	private IRoleDAO roleDaoImpl;
-	@Autowired
-	private IClientDAO clientDaoImpl;
-	@Autowired
-	private IManagerDAO managerDaoImpl;
-	@Autowired
-	private ICounselorDAO counselorDaoImpl;
-	@Autowired
-	private ICurrentAccountDAO currentAccountDaoImpl;
-	@Autowired
-	private ISavingAccountDAO savingAccountDaoImpl;
 	@Autowired
 	private AbstractAccountService abstractAccountService;
 	@Autowired
 	private IClientService clientServiceImpl;
-//	@Autowired
-//	private Init init;
 	@Autowired
-	private ITransactionHistoryDAO transactionHistoryDaoImpl;
+	private IInit init;
 	
 	@RequestMapping(value = {"/", "/home", "/dashboard"}, method = RequestMethod.GET)
 	public ModelAndView home() {
@@ -225,7 +211,7 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 
-//		init.initialize();
+		init.initialize();
 
 		return "login";
 	}
