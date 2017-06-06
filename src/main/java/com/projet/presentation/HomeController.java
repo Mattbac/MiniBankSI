@@ -27,9 +27,7 @@ import com.projet.exception.ClientServiceException;
 import com.projet.dao.IManagerDAO;
 import com.projet.dao.IRoleDAO;
 import com.projet.dao.ISavingAccountDAO;
-import com.projet.dao.IAbstractAccountDAO;
 import com.projet.dao.IClientDAO;
-import com.projet.entity.AbstractAccount;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.entity.CurrentAccount;
@@ -55,8 +53,6 @@ public class HomeController {
 	@Autowired
 	private ICounselorDAO counselorDaoImpl;
 	@Autowired
-	private IAbstractAccountDAO abstractAccountDaoImpl; 
-	@Autowired
 	private ICurrentAccountDAO currentAccountDaoImpl;
 	@Autowired
 	private ISavingAccountDAO savingAccountDaoImpl;
@@ -79,16 +75,42 @@ public class HomeController {
 //		System.out.println(c1.getSavingAccount().getSold());
 //		System.out.println(c2.getSavingAccount().getSold());
 
-		
+		List<Client> listClients;
 		User user = new User();
 		if (((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor() != null) {
 			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
+			listClients = clientDaoImpl.findClientsByCounselor((Counselor) user);
 		} else {
-			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getManager();			
+			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getManager();
+			listClients = clientDaoImpl.findAllClients();
 		}
+		
+		BigDecimal sumSavingAccount = new BigDecimal(0);
+		BigDecimal sumCurrentAccount = new BigDecimal(0);
+		
+		List<Client> listClientNegativ = new ArrayList<Client>();
+		
+		for(Client c : listClients){
+			
+			if(c.getSavingAccount() != null){
+				sumSavingAccount.add(c.getSavingAccount().getSold());
+			}
+			if(c.getCurrentAccount() != null){
+				sumCurrentAccount.add(c.getCurrentAccount().getSold());
+				
+				if(c.getCurrentAccount().getSold().compareTo(new BigDecimal(0)) == -1){
+					listClientNegativ.add(c);
+				}
+			}
+		}
+		
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("user", user);
-		System.out.println(user.toString());
+		mav.addObject("nbClients", listClients.size());
+		mav.addObject("sumSavingAccount", sumSavingAccount);
+		mav.addObject("sumCurrentAccount", sumCurrentAccount);
+		mav.addObject("listClientNegativ", listClientNegativ);
 		return "dashboard";
 	}
 	
@@ -260,32 +282,6 @@ public class HomeController {
 	public String transfert() {
 		return "transfert";
 	}
-	
-	@RequestMapping(value = "/transfert", method = RequestMethod.POST)
-	public ModelAndView makeTransfert( 
-			@RequestParam String debitAccount, 
-			@RequestParam String creditAccount, 
-			@RequestParam BigDecimal sum) {
-		ModelAndView mav = new ModelAndView();
-		
-		try {
-			AbstractAccount accountOne = abstractAccountDaoImpl.findAccountByAccountNumber(debitAccount);
-			AbstractAccount accountTwo = abstractAccountDaoImpl.findAccountByAccountNumber(creditAccount);
-			
-			accountOne.toString();
-			accountTwo.toString();
-			
-			abstractAccountService.virement(accountTwo, accountOne, sum);
-			
-			return new ModelAndView("redirect:/see/clients");
-		}
-		catch (Exception e) {
-			mav.setViewName("transfert");
-			e.printStackTrace();
-			return mav;
-		}
-	}
-	
 	
 	@RequestMapping(value = "/options", method = RequestMethod.GET)
 	public String options() {
