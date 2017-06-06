@@ -38,32 +38,46 @@
                                                 <td><c:out value="${client.firstName}"/></td>
                                                 <td class="text-center">
                                                 	<c:choose>
-                                                		<c:when test="${client.currentAccount.sold > 0}">
-                                                			<i class="fa fa-check text-success"></i>
+                                                		<c:when test="${client.currentAccount == null}">
+                                                			<i class="fa fa-minus text-muted"></i>
                                                 		</c:when>
                                                 		<c:otherwise>
-                                                			<i class="fa fa-times text-danger"></i>
-                                                		</c:otherwise>
+		                                                	<c:choose>
+		                                                		<c:when test="${client.currentAccount.sold > 0}">
+		                                                			<i class="fa fa-check text-success"></i>
+		                                                		</c:when>
+		                                                		<c:otherwise>
+		                                                			<i class="fa fa-times text-danger"></i>
+		                                                		</c:otherwise>
+		                                                	</c:choose>
+														</c:otherwise>
                                                 	</c:choose>
                                                 </td>
                                                 <td class="text-center">
                                                 	<c:choose>
-                                                		<c:when test="${client.savingAccount.sold > 0}">
-                                                			<i class="fa fa-check text-success"></i>
+                                                		<c:when test="${client.savingAccount == null}">
+                                                			<i class="fa fa-minus text-muted"></i>
                                                 		</c:when>
                                                 		<c:otherwise>
-                                                			<i class="fa fa-times text-danger"></i>
-                                                		</c:otherwise>
-                                                	</c:choose>
+		                                                	<c:choose>
+		                                                		<c:when test="${client.savingAccount.sold > 0}">
+		                                                			<i class="fa fa-check text-success"></i>
+		                                                		</c:when>
+		                                                		<c:otherwise>
+		                                                			<i class="fa fa-times text-danger"></i>
+		                                                		</c:otherwise>
+		                                                	</c:choose>
+														</c:otherwise>
+													</c:choose>
                                                 </td>
                                                 <td class="td-actions text-right" style="">
                                                     <a class="btn btn-post-action btn-simple btn-info btn-icon table-action view" href="<%=request.getContextPath()%>/see/client/<c:out value="${client.id}"/>" rel="tooltip" data-original-title="Voir profil">
                                                         <i class="fa fa-external-link"></i>
                                                     </a>
-                                                    <a class="btn btn-post-action btn-simple btn-success btn-icon table-action edit" href="javascript:void(0)" rel="tooltip" title="" data-original-title="Modifier">
+                                                    <a class="btn btn-post-action btn-simple btn-success btn-icon table-action edit" href="<%=request.getContextPath()%>/modify/client/<c:out value="${client.id}"/>" rel="tooltip" title="" data-original-title="Modifier">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                    <a class="btn btn-post-action btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)" rel="tooltip" title="" data-original-title="Supprimer">
+                                                    <a class="btn btn-post-action btn-simple btn-danger btn-icon table-action remove" href="<%=request.getContextPath()%>/delete/client/<c:out value="${client.id}"/>" rel="tooltip" title="" data-original-title="Supprimer">
                                                         <i class="fa fa-remove"></i>
                                                     </a>
                                                 </td>

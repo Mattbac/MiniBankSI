@@ -2,6 +2,8 @@ package com.projet.service.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.projet.entity.Counselor;
 import com.projet.exception.ClientServiceException;
 import com.projet.service.IClientService;
 
+@Transactional
 @Service
 public class ClientServiceImpl implements IClientService {
 
@@ -54,6 +57,18 @@ public class ClientServiceImpl implements IClientService {
 		if (client.getZipCode() == null || client.getZipCode().trim().length() == 0) {
 			throw new ClientServiceException ("zipCode", "le prénom ne doit pas être nul");
 		}		
+	}
+
+	@Override
+	public void delete(Long id) {
+		Client client = clientDaoImpl.findClientById(id);
+		if (validateToDelete(client)) {
+			clientDaoImpl.deleteClient(client);
+		}
+	}
+
+	private boolean validateToDelete(Client client) {
+		return true;
 	}
 	
 }

@@ -12,6 +12,9 @@
 			<li><a href="<%=request.getContextPath()%>/see/clients"> <i class="pe-7s-menu"></i>
 					<p>Liste des clients</p>
 			</a></li>
+			<li><a href="<%=request.getContextPath()%>/create/client"> <i class="pe-7s-user"></i>
+					<p>Nouveau client</p>
+			</a></li>
 			<li><a href="<%=request.getContextPath()%>/recherche"> <i
 					class="pe-7s-search"></i>
 					<p>Recherche</p>

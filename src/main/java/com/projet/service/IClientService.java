@@ -11,4 +11,5 @@ public interface IClientService {
 	List<Client> getAllClientsByCounselor(Counselor counselor);
 	Client findById(Long id);
 	void update(Client client) throws ClientServiceException;
+	void delete(Long id);
 }
