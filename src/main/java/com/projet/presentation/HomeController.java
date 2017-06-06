@@ -68,10 +68,10 @@ public class HomeController {
 		User user = new User();
 		if (((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor() != null) {
 			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
-			listClients = clientDaoImpl.findClientsByCounselor((Counselor) user);
+			listClients = clientServiceImpl.getAllClientsByCounselor((Counselor) user);
 		} else {
 			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getManager();
-			listClients = clientDaoImpl.findAllClients();
+			listClients = clientServiceImpl.getAllClientsByManager((Manager) user);
 		}
 		
 		BigDecimal sumSavingAccount = new BigDecimal(0);
@@ -114,8 +114,17 @@ public class HomeController {
 	
 	@GetMapping("/see/clients")
 	public ModelAndView listeClients(HttpSession session, @RequestParam(required = false) Integer pageNumber) {
-		Counselor counselor = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
-		List<Client> clients = clientServiceImpl.getAllClientsByCounselor(counselor);
+		
+		List<Client> clients;
+		User user = new User();
+		if (((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor() != null) {
+			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
+			clients = clientServiceImpl.getAllClientsByCounselor((Counselor) user);
+		} else {
+			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getManager();
+			clients = clientServiceImpl.getAllClientsByManager((Manager) user); 
+		}
+		
 		PagedListHolder<Client> page = new PagedListHolder<>(clients);
 		page.setPageSize(CLIENTS_PER_PAGE);
 		ModelAndView mav = new ModelAndView();
