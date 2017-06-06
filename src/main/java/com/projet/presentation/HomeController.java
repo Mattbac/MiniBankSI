@@ -64,17 +64,6 @@ public class HomeController {
 	@RequestMapping(value = {"/", "/home", "/dashboard"}, method = RequestMethod.GET)
 	public String home() {
 
-//		Client c1 = clientDaoImpl.findClientById((long) 3);
-//		Client c2 = clientDaoImpl.findClientById((long) 2);
-//		
-//		System.out.println(c1.getSavingAccount().getSold());
-//		System.out.println(c2.getSavingAccount().getSold());
-//		
-//		abstractAccountService.virement(c1.getSavingAccount(), c2.getSavingAccount(), new BigDecimal(300));
-//		
-//		System.out.println(c1.getSavingAccount().getSold());
-//		System.out.println(c2.getSavingAccount().getSold());
-
 		List<Client> listClients;
 		User user = new User();
 		if (((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor() != null) {
