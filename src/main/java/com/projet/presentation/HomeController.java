@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -93,10 +94,10 @@ public class HomeController {
 			}
 		}
 		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("user", user);
 		mav.addObject("nbClients", listClients.size());
+		System.out.println(listClients.size());
 		mav.addObject("sumSavingAccount", sumSavingAccount);
 		mav.addObject("sumCurrentAccount", sumCurrentAccount);
 		mav.addObject("listClientNegativ", listClientNegativ);
