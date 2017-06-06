@@ -28,6 +28,7 @@ import com.projet.exception.ClientServiceException;
 import com.projet.dao.IManagerDAO;
 import com.projet.dao.IRoleDAO;
 import com.projet.dao.ISavingAccountDAO;
+import com.projet.dao.ITransactionHistoryDAO;
 import com.projet.dao.IClientDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
@@ -35,6 +36,7 @@ import com.projet.entity.CurrentAccount;
 import com.projet.entity.Manager;
 import com.projet.entity.Role;
 import com.projet.entity.SavingAccount;
+import com.projet.entity.TransactionHistory;
 import com.projet.entity.User;
 import com.projet.service.AbstractAccountService;
 import com.projet.service.IClientService;
@@ -61,6 +63,8 @@ public class HomeController {
 	private AbstractAccountService abstractAccountService;
 	@Autowired
 	private IClientService clientServiceImpl;
+	@Autowired
+	private ITransactionHistoryDAO transactionHistoryDaoImpl;
 	
 	@RequestMapping(value = {"/", "/home", "/dashboard"}, method = RequestMethod.GET)
 	public ModelAndView home() {
@@ -84,8 +88,6 @@ public class HomeController {
 		for(Client c : listClients){
 			
 			if(c.getSavingAccount() != null){
-
-				System.out.println(sumSavingAccount);
 				
 				sumSavingAccount = sumSavingAccount.add(c.getSavingAccount().getSold());
 				if(c.getSavingAccount().getSold().compareTo(new BigDecimal(500000)) == 1){
@@ -106,7 +108,6 @@ public class HomeController {
 		mav.setViewName("dashboard");
 		mav.addObject("user", user);
 		mav.addObject("nbClients", listClients.size());
-		System.out.println(listClients.size());
 		mav.addObject("sumSavingAccount", sumSavingAccount);
 		mav.addObject("sumCurrentAccount", sumCurrentAccount);
 		mav.addObject("listClientNegativ", listClientNegativ);
@@ -279,6 +280,7 @@ public class HomeController {
 				}
 			}
 		}*/
+		
 		return "login";
 	}
 

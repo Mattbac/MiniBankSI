@@ -60,4 +60,11 @@ public class TransactionHistory {
 	public void setCreated(Date created) {		this.created = created;	}
 	public void setSum(BigDecimal sum) {		this.sum = sum;	}
 	public void setUser(User user) {		this.user = user;	}
+
+
+	@Override
+	public String toString() {
+		return "TransactionHistory [debitAccount=" + debitAccount + ", creditAccount=" + creditAccount + ", created="
+				+ created + ", sum=" + sum + ", user=" + user + "]";
+	}
 }
