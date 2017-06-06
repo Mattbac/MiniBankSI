@@ -12,7 +12,6 @@ import com.projet.entity.SavingAccount;
 import com.projet.entity.TransactionHistory;
 import com.projet.dao.IAbstractAccountDAO;
 import com.projet.dao.ITransactionHistoryDAO;
-import com.projet.dao.impl.TransactionHistoryDaoImpl;
 
 @Repository
 public class AbstractAccountService {

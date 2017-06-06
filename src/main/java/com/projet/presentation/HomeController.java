@@ -89,11 +89,15 @@ public class HomeController {
 		BigDecimal sumCurrentAccount = new BigDecimal(0);
 		
 		List<Client> listClientNegativ = new ArrayList<Client>();
+		List<Client> listClientSavingOver500000 = new ArrayList<Client>();
 		
 		for(Client c : listClients){
 			
 			if(c.getSavingAccount() != null){
 				sumSavingAccount.add(c.getSavingAccount().getSold());
+				if(c.getSavingAccount().getSold().compareTo(new BigDecimal(500000)) == 1){
+					listClientSavingOver500000.add(c);
+				}
 			}
 			if(c.getCurrentAccount() != null){
 				sumCurrentAccount.add(c.getCurrentAccount().getSold());
@@ -104,13 +108,13 @@ public class HomeController {
 			}
 		}
 		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("user", user);
 		mav.addObject("nbClients", listClients.size());
 		mav.addObject("sumSavingAccount", sumSavingAccount);
 		mav.addObject("sumCurrentAccount", sumCurrentAccount);
 		mav.addObject("listClientNegativ", listClientNegativ);
+		mav.addObject("listClientSavingOver500000", listClientSavingOver500000);
 		return "dashboard";
 	}
 	
