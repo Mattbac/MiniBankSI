@@ -62,7 +62,7 @@ public class HomeController {
 	private IClientService clientServiceImpl;
 	
 	@RequestMapping(value = {"/", "/home", "/dashboard"}, method = RequestMethod.GET)
-	public String home() {
+	public ModelAndView home() {
 
 		List<Client> listClients;
 		User user = new User();
@@ -83,13 +83,17 @@ public class HomeController {
 		for(Client c : listClients){
 			
 			if(c.getSavingAccount() != null){
-				sumSavingAccount.add(c.getSavingAccount().getSold());
+
+				System.out.println(sumSavingAccount);
+				
+				sumSavingAccount = sumSavingAccount.add(c.getSavingAccount().getSold());
 				if(c.getSavingAccount().getSold().compareTo(new BigDecimal(500000)) == 1){
 					listClientSavingOver500000.add(c);
 				}
 			}
+			
 			if(c.getCurrentAccount() != null){
-				sumCurrentAccount.add(c.getCurrentAccount().getSold());
+				sumCurrentAccount = sumCurrentAccount.add(c.getCurrentAccount().getSold());
 				
 				if(c.getCurrentAccount().getSold().compareTo(new BigDecimal(0)) == -1){
 					listClientNegativ.add(c);
@@ -98,13 +102,14 @@ public class HomeController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("dashboard");
 		mav.addObject("user", user);
 		mav.addObject("nbClients", listClients.size());
 		mav.addObject("sumSavingAccount", sumSavingAccount);
 		mav.addObject("sumCurrentAccount", sumCurrentAccount);
 		mav.addObject("listClientNegativ", listClientNegativ);
 		mav.addObject("listClientSavingOver500000", listClientSavingOver500000);
-		return "dashboard";
+		return mav;
 	}
 	
 	@GetMapping("/see/clients")
