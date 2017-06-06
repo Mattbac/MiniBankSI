@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -18,9 +19,11 @@ public abstract class AbstractPerson {
 	@Column(name="id", nullable=false, unique=true)
 	private long id;
 	// First name = prenom
+	@Pattern(regexp="[a-zA-Z]{3,}[0-9]{0,}", message="invalid firstName")
 	@Column(name="firstName", nullable=false)
 	private String firstName;
 	// Last name = nom
+	@Pattern(regexp="[a-zA-Z]{3,}[0-9]{0,}", message="invalid lastName")
 	@Column(name="lastName", nullable=false)
 	private String lastName;
 	

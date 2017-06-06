@@ -39,61 +39,28 @@ public class ClientServiceImpl implements IClientService {
 	}
 	
 	@Override
-	public void create(Client client, CurrentAccount currentAccount, SavingAccount savingAccount) throws ClientServiceException {
-		try{
-			validate(client);
-			if(currentAccount != null){
-				client.setCurrentAccount(currentAccount);
-				currentAccountDaoImpl.createAccount(currentAccount);
-			}
-			if(savingAccount != null){
-				client.setSavingAccount(savingAccount);
-				savingAccountDaoImpl.createAccount(savingAccount);
-			}
-			clientDaoImpl.createClient(client);
+	public void create(Client client, CurrentAccount currentAccount, SavingAccount savingAccount) {
+		if(currentAccount != null){
+			client.setCurrentAccount(currentAccount);
+			currentAccountDaoImpl.createAccount(currentAccount);
 		}
-		catch (ClientServiceException e) {
-			throw e;
+		if(savingAccount != null){
+			client.setSavingAccount(savingAccount);
+			savingAccountDaoImpl.createAccount(savingAccount);
 		}
+		clientDaoImpl.createClient(client);
 	}
 
 	@Override
-	public void update(Client client, Long id) throws ClientServiceException {
+	public void update(Client client, Long id) {
 		Client clientTemp = clientDaoImpl.findClientById(id);
-		try {
-			validate(client);
-			clientTemp.setFirstName(client.getFirstName());
-			clientTemp.setLastName(client.getLastName());
-			clientTemp.setAdress(client.getAdress());
-			clientTemp.setZipCode(client.getZipCode());
-			clientTemp.setCity(client.getCity());
-			clientTemp.setPhoneNumber(client.getPhoneNumber());
-			clientDaoImpl.updateClient(clientTemp);
-		}
-		catch (ClientServiceException e) {
-			throw e;
-		}
-	}
-
-	private void validate(Client client) throws ClientServiceException{
-		if (client.getFirstName() == null || client.getFirstName().trim().length() == 0) {
-			throw new ClientServiceException ("firstName", "le prénom ne doit pas être nul");
-		}
-		if (client.getLastName() == null || client.getLastName().trim().length() == 0) {
-			throw new ClientServiceException ("lastName", "le prénom ne doit pas être nul");
-		}
-		if (client.getAdress() == null || client.getAdress().trim().length() == 0) {
-				throw new ClientServiceException ("adress", "le prénom ne doit pas être nul");
-		}
-		if (client.getZipCode() == null || client.getZipCode().trim().length() == 0) {
-			throw new ClientServiceException ("zipCode", "le prénom ne doit pas être nul");
-		}
-		if (client.getZipCode() == null || client.getZipCode().trim().length() == 0) {
-			throw new ClientServiceException ("zipCode", "le prénom ne doit pas être nul");
-		}
-		if (client.getPhoneNumber() == null || client.getPhoneNumber().trim().length() == 0) {
-			throw new ClientServiceException ("phoneNumber", "le prénom ne doit pas être nul");
-		}
+		clientTemp.setFirstName(client.getFirstName());
+		clientTemp.setLastName(client.getLastName());
+		clientTemp.setAdress(client.getAdress());
+		clientTemp.setZipCode(client.getZipCode());
+		clientTemp.setCity(client.getCity());
+		clientTemp.setPhoneNumber(client.getPhoneNumber());
+		clientDaoImpl.updateClient(clientTemp);
 	}
 
 	@Override

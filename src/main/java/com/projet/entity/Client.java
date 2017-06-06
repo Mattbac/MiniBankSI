@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.projet.entity.Counselor;
 
@@ -17,16 +17,16 @@ import com.projet.entity.Counselor;
 @Table(name="client")
 public class Client extends AbstractPerson {
 	
-	@NotNull
+	@Pattern(regexp="[0-9]{1,} [a-zA-Z]{3,}", message="invalid adress")
 	@Column(name="adress", nullable=false)
 	private String adress;
-	@NotNull
+	@Pattern(regexp="[0-9]{2} ?[0-9]{3}", message="invalid zipCode")
 	@Column(name="zipCode", nullable=false)
 	private String zipCode;
-	@NotNull
+	@Pattern(regexp="[a-zA-z]{3,}-?[a-zA-z]{0,}-?[a-zA-z]{0,}", message="invalid city")
 	@Column(name="city", nullable=false)
 	private String city;
-	@NotNull
+	@Pattern(regexp="(\\+33|\\+33\\(0\\)|\\+33 \\(0\\)|0)[ .]?[0-9]{1}([ .]?[0-9]{2}){4}", message="invalid phoneNumber")
 	@Column(name="phoneNumber", nullable=false)
 	private String phoneNumber;
 	@OneToOne
@@ -35,7 +35,6 @@ public class Client extends AbstractPerson {
 	@OneToOne
 	@JoinColumn(name="currentAccount")
 	private CurrentAccount currentAccount;
-	@NotNull
 	@ManyToOne
 	@JoinColumn(name="counselor", nullable=false)
 	private Counselor counselor;

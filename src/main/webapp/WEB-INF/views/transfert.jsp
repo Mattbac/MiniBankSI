@@ -58,6 +58,9 @@
                                         <div class="col-md-8">
                                     		<button type="submit" class="btn btn-info btn-fill pull-right">Valider le transfert</button>
                                     	</div>
+                                    	<div>
+                                    		<c:out value="${error}"/>
+                                    	</div>
                                     </div>
                                     <div class="clearfix"></div>
                                 </f:form>

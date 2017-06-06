@@ -24,9 +24,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.projet.dao.ICounselorDAO;
 import com.projet.dao.ICurrentAccountDAO;
 import com.projet.exception.ClientServiceException;
+import com.projet.exception.virementException;
 import com.projet.dao.IManagerDAO;
 import com.projet.dao.IRoleDAO;
 import com.projet.dao.ISavingAccountDAO;
+import com.project.init.Init;
 import com.projet.dao.IAbstractAccountDAO;
 import com.projet.dao.IClientDAO;
 import com.projet.entity.AbstractAccount;
@@ -64,21 +66,11 @@ public class HomeController {
 	private AbstractAccountService abstractAccountService;
 	@Autowired
 	private IClientService clientServiceImpl;
+//	@Autowired
+//	private Init init;
 	
 	@RequestMapping(value = {"/", "/home", "/dashboard"}, method = RequestMethod.GET)
 	public String home() {
-
-//		Client c1 = clientDaoImpl.findClientById((long) 3);
-//		Client c2 = clientDaoImpl.findClientById((long) 2);
-//		
-//		System.out.println(c1.getSavingAccount().getSold());
-//		System.out.println(c2.getSavingAccount().getSold());
-//		
-//		abstractAccountService.virement(c1.getSavingAccount(), c2.getSavingAccount(), new BigDecimal(300));
-//		
-//		System.out.println(c1.getSavingAccount().getSold());
-//		System.out.println(c2.getSavingAccount().getSold());
-
 		
 		User user = new User();
 		if (((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor() != null) {
@@ -118,32 +110,22 @@ public class HomeController {
 	@GetMapping("/modify/client/{id}")
 	public ModelAndView modifyClient(@PathVariable Long id) {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("client", clientServiceImpl.findById(id));
+		mav = mav.addObject("client", clientServiceImpl.findById(id));
 		mav.setViewName("edit-client");
 		return mav;
 	}
 	
 	@PostMapping("/modify/client/{id}")
-	@Valid
-	public ModelAndView modifyClient (@ModelAttribute("client") Client clientForm, BindingResult result, @PathVariable Long id) {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView modifyClient (@ModelAttribute("client") @Valid Client clientForm, BindingResult result, @PathVariable Long id) {
+		
 		
 		if (result.hasErrors()) {
-			System.out.println(result.toString());
+			ModelAndView mav = new ModelAndView();
 			mav.setViewName("edit-client");
 			return mav;
 		}
-		try {
-			System.out.println("update");
-			clientServiceImpl.update(clientForm, id);
-			return new ModelAndView("redirect:/see/client/"+id);
-		}
-		catch (ClientServiceException e) {
-			System.out.println("update error");
-			result.rejectValue(e.getChamp(), e.getChamp(), e.getMessage());
-			mav.setViewName("edit-client");
-			return mav;
-		}
+		clientServiceImpl.update(clientForm, id);
+		return new ModelAndView("redirect:/see/client/"+id);
 	}
 	
 	@GetMapping("/create/client")
@@ -155,8 +137,7 @@ public class HomeController {
 	}
 	
 	@PostMapping("/create/client")
-//	@Valid
-	public ModelAndView createClientIn(@ModelAttribute("client") Client client, BindingResult result, @RequestParam(required = false) boolean saving, @RequestParam(required = false) boolean current) {
+	public ModelAndView createClientIn(@ModelAttribute("client") @Valid Client client, BindingResult result, @RequestParam(required = false) boolean saving, @RequestParam(required = false) boolean current) {
 		ModelAndView mav = new ModelAndView();
 		
 		if (result.hasErrors()) {
@@ -199,55 +180,8 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 
-		/*
-		Role rc = new Role("ROLE_counselor");
-		roleDaoImpl.create(rc);
-		Role rm = new Role("ROLE_manager");
-		roleDaoImpl.create(rm);
-		
-		int counselor = 0;
-		
-		for(int i = 0; i < 2 ;i++){
-			Manager m = new Manager("manager"+i, "manager"+i, rm, "Agency "+i);
-			managerDaoImpl.create(m);
+//		init.initialize();
 
-			int g = (int) Math.floor((Math.random() * 5) + 3);
-			
-			for(int j = 0; j < g ;j++){
-				Counselor c = new Counselor("counselor"+counselor, "counselor"+counselor, rc, m);
-				counselor++;
-				counselorDaoImpl.createCounselor(c);
-				
-				int r = (int) Math.floor((Math.random() * 9) + 10);
-				
-				for(int k = 0; k < r ;k++){
-					
-					CurrentAccount current = null;
-					SavingAccount saving = null;
-					
-					if( Math.floor((Math.random() * 10)) < 5){
-						current = new CurrentAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
-						currentAccountDaoImpl.createAccount(current);
-					}
-					
-					if( current == null || Math.floor((Math.random() * 10)) < 5){
-						saving = new SavingAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
-						savingAccountDaoImpl.createAccount(saving);
-					}
-					
-					Client ct = null;
-					
-					if(current != null && saving != null){
-						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), saving, current, c);
-					}else if(current != null) {
-						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), current, c);
-					}else if(saving != null){
-						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), saving, c);
-					}
-					clientDaoImpl.createClient(ct);
-				}
-			}
-		}*/
 		return "login";
 	}
 
@@ -269,19 +203,12 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView();
 		
 		try {
-			AbstractAccount accountOne = abstractAccountDaoImpl.findAccountByAccountNumber(debitAccount);
-			AbstractAccount accountTwo = abstractAccountDaoImpl.findAccountByAccountNumber(creditAccount);
-			
-			accountOne.toString();
-			accountTwo.toString();
-			
-			abstractAccountService.virement(accountTwo, accountOne, sum);
-			
+			abstractAccountService.virement(creditAccount, debitAccount, sum);
 			return new ModelAndView("redirect:/see/clients");
 		}
-		catch (Exception e) {
+		catch (virementException e) {
 			mav.setViewName("transfert");
-			e.printStackTrace();
+			mav.addObject("error", e.getMessage());
 			return mav;
 		}
 	}
