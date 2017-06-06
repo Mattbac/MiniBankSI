@@ -181,6 +181,12 @@ public class HomeController {
 		}
 	}
 	
+	@GetMapping("/delete/client/{id}")
+	public ModelAndView deleteClient(@PathVariable Long id) {
+		clientServiceImpl.delete(id);
+		return new ModelAndView("redirect:/see/clients");
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
 
@@ -210,24 +216,24 @@ public class HomeController {
 					CurrentAccount current = null;
 					SavingAccount saving = null;
 					
-//					if( Math.floor((Math.random() * 10)) < 5){
+					if( Math.floor((Math.random() * 10)) < 5){
 						current = new CurrentAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
 						currentAccountDaoImpl.createAccount(current);
-//					}
+					}
 					
-//					if( current == null || Math.floor((Math.random() * 10)) < 5){
+					if( current == null || Math.floor((Math.random() * 10)) < 5){
 						saving = new SavingAccount(new BigDecimal(Math.floor((Math.random() * 10000))));
 						savingAccountDaoImpl.createAccount(saving);
-//					}
+					}
 					
 					Client ct = null;
 					
 					if(current != null && saving != null){
 						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), saving, current, c);
-//					}else if(current != null) {
-//						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), current, c);
-//					}else if(saving != null){
-//						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), saving, c);
+					}else if(current != null) {
+						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), current, c);
+					}else if(saving != null){
+						ct = new Client("firstname"+k, "lastname"+k, "12 Rue Victor Hugo", "59 000", "Lille", "06" + Long.toString((long) Math.floor((Math.random() * 1000000000) + 10000000)).substring(0,8), saving, c);
 					}
 					clientDaoImpl.createClient(ct);
 				}

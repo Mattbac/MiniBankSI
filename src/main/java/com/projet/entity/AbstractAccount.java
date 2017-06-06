@@ -20,6 +20,7 @@ public abstract class AbstractAccount {
 	@GeneratedValue
 	@Column(name="id", nullable=false, unique=true)
 	private Long id;
+//	@GeneratedValue
 	@Column(name="accountNumber", nullable=false, unique=true)
 	private String accountNumber;
 	@Column(name="sold", nullable=false)
