@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,14 +31,15 @@ import com.projet.dao.IRoleDAO;
 import com.projet.dao.ISavingAccountDAO;
 import com.project.init.Init;
 import com.projet.dao.IAbstractAccountDAO;
+import com.projet.dao.ITransactionHistoryDAO;
 import com.projet.dao.IClientDAO;
-import com.projet.entity.AbstractAccount;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.entity.CurrentAccount;
 import com.projet.entity.Manager;
 import com.projet.entity.Role;
 import com.projet.entity.SavingAccount;
+import com.projet.entity.TransactionHistory;
 import com.projet.entity.User;
 import com.projet.service.AbstractAccountService;
 import com.projet.service.IClientService;
@@ -57,8 +59,6 @@ public class HomeController {
 	@Autowired
 	private ICounselorDAO counselorDaoImpl;
 	@Autowired
-	private IAbstractAccountDAO abstractAccountDaoImpl; 
-	@Autowired
 	private ICurrentAccountDAO currentAccountDaoImpl;
 	@Autowired
 	private ISavingAccountDAO savingAccountDaoImpl;
@@ -68,26 +68,71 @@ public class HomeController {
 	private IClientService clientServiceImpl;
 //	@Autowired
 //	private Init init;
+	@Autowired
+	private ITransactionHistoryDAO transactionHistoryDaoImpl;
 	
 	@RequestMapping(value = {"/", "/home", "/dashboard"}, method = RequestMethod.GET)
-	public String home() {
-		
+	public ModelAndView home() {
+
+		List<Client> listClients;
 		User user = new User();
 		if (((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor() != null) {
 			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
+			listClients = clientServiceImpl.getAllClientsByCounselor((Counselor) user);
 		} else {
-			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getManager();			
+			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getManager();
+			listClients = clientServiceImpl.getAllClientsByManager((Manager) user);
 		}
+		
+		BigDecimal sumSavingAccount = new BigDecimal(0);
+		BigDecimal sumCurrentAccount = new BigDecimal(0);
+		
+		List<Client> listClientNegativ = new ArrayList<Client>();
+		List<Client> listClientSavingOver500000 = new ArrayList<Client>();
+		
+		for(Client c : listClients){
+			
+			if(c.getSavingAccount() != null){
+				
+				sumSavingAccount = sumSavingAccount.add(c.getSavingAccount().getSold());
+				if(c.getSavingAccount().getSold().compareTo(new BigDecimal(500000)) == 1){
+					listClientSavingOver500000.add(c);
+				}
+			}
+			
+			if(c.getCurrentAccount() != null){
+				sumCurrentAccount = sumCurrentAccount.add(c.getCurrentAccount().getSold());
+				
+				if(c.getCurrentAccount().getSold().compareTo(new BigDecimal(0)) == -1){
+					listClientNegativ.add(c);
+				}
+			}
+		}
+		
 		ModelAndView mav = new ModelAndView();
+		mav.setViewName("dashboard");
 		mav.addObject("user", user);
-		System.out.println(user.toString());
-		return "dashboard";
+		mav.addObject("nbClients", listClients.size());
+		mav.addObject("sumSavingAccount", sumSavingAccount);
+		mav.addObject("sumCurrentAccount", sumCurrentAccount);
+		mav.addObject("listClientNegativ", listClientNegativ);
+		mav.addObject("listClientSavingOver500000", listClientSavingOver500000);
+		return mav;
 	}
 	
 	@GetMapping("/see/clients")
 	public ModelAndView listeClients(HttpSession session, @RequestParam(required = false) Integer pageNumber) {
-		Counselor counselor = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
-		List<Client> clients = clientServiceImpl.getAllClientsByCounselor(counselor);
+		
+		List<Client> clients;
+		User user = new User();
+		if (((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor() != null) {
+			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor();
+			clients = clientServiceImpl.getAllClientsByCounselor((Counselor) user);
+		} else {
+			user = ((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getManager();
+			clients = clientServiceImpl.getAllClientsByManager((Manager) user); 
+		}
+		
 		PagedListHolder<Client> page = new PagedListHolder<>(clients);
 		page.setPageSize(CLIENTS_PER_PAGE);
 		ModelAndView mav = new ModelAndView();
@@ -214,6 +259,7 @@ public class HomeController {
 	}
 	
 	
+
 	@RequestMapping(value = "/options", method = RequestMethod.GET)
 	public String options() {
 		return "options";

@@ -13,6 +13,7 @@ import com.projet.dao.ISavingAccountDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.entity.CurrentAccount;
+import com.projet.entity.Manager;
 import com.projet.entity.SavingAccount;
 import com.projet.exception.ClientServiceException;
 import com.projet.service.IClientService;
@@ -31,6 +32,11 @@ public class ClientServiceImpl implements IClientService {
 	@Override
 	public List<Client> getAllClientsByCounselor(Counselor counselor) {
 		return clientDaoImpl.findClientsByCounselor(counselor);
+	}
+	
+	@Override
+	public List<Client> getAllClientsByManager(Manager manager) {
+		return clientDaoImpl.findAllClientsByManager(manager);
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.projet.dao.IClientDAO;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
+import com.projet.entity.Manager;
 
 @Transactional
 @Repository
@@ -50,6 +51,13 @@ public class ClientDaoImpl implements IClientDAO{
 	@Override
 	public List<Client> findClientsByNegativeSold() {
 		TypedQuery<Client> q = em.createQuery("from Client where savingAccount.sold < 0 or currentAccount.sold < 0", Client.class);
+		return q.getResultList();
+	}
+
+	@Override
+	public List<Client> findAllClientsByManager(Manager user) {
+		TypedQuery<Client> q = em.createQuery("from Client where counselor.manager = :m", Client.class);
+		q.setParameter("m", user);
 		return q.getResultList();
 	}
 
