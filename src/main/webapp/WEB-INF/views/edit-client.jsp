@@ -1,4 +1,5 @@
 <%@include file="jspf/header.jspf" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
 
 <div class="wrapper">
 	<%@include file="jspf/sidebar.jspf" %>
@@ -17,18 +18,21 @@
                                 <h4 class="title">Modification des informations client</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                <f:form modelAttribute="client" method="post">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Nom</label>
-                                                <input type="text" class="form-control" placeholder="Nom" <c:out value="${client.lastName}"/>>
+                                                <f:label path="lastName">Lastname :</f:label> 
+                                                <f:input class="form-control" path="lastName" />
+                                                <f:errors path="lastName" />
+                                                
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label>Prénom</label>
-                                                <input type="text" class="form-control" placeholder="Prénom" <c:out value="${client.firstName}"/>>
+                                            	<f:label path="firstName">FirstName :</f:label>
+                                                <f:input class="form-control" path="firstName" />
+                                                <f:errors path="firstName" />
                                             </div>
                                         </div>
                                     </div>
@@ -36,8 +40,9 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Adresse</label>
-                                                <input type="text" class="form-control" placeholder="Adresse" <c:out value="${client.adress}"/>>
+                                            	<f:label path="adress">Adress :</f:label>
+                                                <f:input class="form-control" path="adress" />
+                                                <f:errors path="adress" />
                                             </div>
                                         </div>
                                     </div>
@@ -45,8 +50,9 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>City</label>
-                                                <input type="text" class="form-control" placeholder="Ville" <c:out value="${client.city}"/>>
+                                            	<f:label path="city">City :</f:label>
+                                                <f:input class="form-control" path="city" />
+                                                <f:errors path="city" />
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -57,15 +63,26 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Code Postal</label>
-                                                <input type="text" class="form-control" placeholder="Code Postal" <c:out value="${client.zipCode}"/>>
+                                            	<f:label path="zipCode">ZipCode :</f:label>
+                                                <f:input class="form-control" path="zipCode" />
+                                                <f:errors path="zipCode" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                            	<f:label path="phoneNumber">Phone number :</f:label>
+                                                <f:input class="form-control" path="phoneNumber" />
+                                                <f:errors path="phoneNumber" />
                                             </div>
                                         </div>
                                     </div>
 
                                     <button type="submit" class="btn btn-info btn-fill pull-right">Mettre à jour</button>
                                     <div class="clearfix"></div>
-                                </form>
+                                </f:form>
                             </div>
                         </div>
                     </div>

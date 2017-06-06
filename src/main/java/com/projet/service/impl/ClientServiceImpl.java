@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projet.dao.IClientDAO;
+import com.projet.dao.ICurrentAccountDAO;
+import com.projet.dao.ISavingAccountDAO;
+import com.projet.entity.AbstractAccount;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
+import com.projet.entity.CurrentAccount;
+import com.projet.entity.SavingAccount;
 import com.projet.exception.ClientServiceException;
 import com.projet.service.IClientService;
 
@@ -16,6 +21,10 @@ public class ClientServiceImpl implements IClientService {
 
 	@Autowired
 	private IClientDAO clientDaoImpl;
+	@Autowired
+	private ICurrentAccountDAO currentAccountDaoImpl;
+	@Autowired
+	private ISavingAccountDAO savingAccountDaoImpl;
 	
 	@Override
 	public List<Client> getAllClientsByCounselor(Counselor counselor) {
@@ -26,12 +35,38 @@ public class ClientServiceImpl implements IClientService {
 	public Client findById(Long id) {
 		return clientDaoImpl.findClientById(id);
 	}
+	
+	@Override
+	public void create(Client client, CurrentAccount currentAccount, SavingAccount savingAccount) throws ClientServiceException {
+		try{
+			validate(client);
+			if(currentAccount != null){
+				client.setCurrentAccount(currentAccount);
+				currentAccountDaoImpl.createAccount(currentAccount);
+			}
+			if(savingAccount != null){
+				client.setSavingAccount(savingAccount);
+				savingAccountDaoImpl.createAccount(savingAccount);
+			}
+			clientDaoImpl.createClient(client);
+		}
+		catch (ClientServiceException e) {
+			throw e;
+		}
+	}
 
 	@Override
-	public void update(Client client) throws ClientServiceException {
+	public void update(Client client, Long id) throws ClientServiceException {
+		Client clientTemp = clientDaoImpl.findClientById(id);
 		try {
 			validate(client);
-			clientDaoImpl.updateClient(client);
+			clientTemp.setFirstName(client.getFirstName());
+			clientTemp.setLastName(client.getLastName());
+			clientTemp.setAdress(client.getAdress());
+			clientTemp.setZipCode(client.getZipCode());
+			clientTemp.setCity(client.getCity());
+			clientTemp.setPhoneNumber(client.getPhoneNumber());
+			clientDaoImpl.updateClient(clientTemp);
 		}
 		catch (ClientServiceException e) {
 			throw e;
@@ -53,7 +88,10 @@ public class ClientServiceImpl implements IClientService {
 		}
 		if (client.getZipCode() == null || client.getZipCode().trim().length() == 0) {
 			throw new ClientServiceException ("zipCode", "le prénom ne doit pas être nul");
-		}		
+		}
+		if (client.getPhoneNumber() == null || client.getPhoneNumber().trim().length() == 0) {
+			throw new ClientServiceException ("phoneNumber", "le prénom ne doit pas être nul");
+		}
 	}
 	
 }

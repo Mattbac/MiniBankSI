@@ -15,7 +15,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="col-md-10 title">Profil client</h4>
-                                <a class="col-md-2 btn btn-info btn-fill btn-wd" href="<%=request.getContextPath()%>/modify/client">Modifier le profil</a>
+                                <a class="col-md-2 btn btn-info btn-fill btn-wd" href="<%=request.getContextPath()%>/modify/client/<c:out value="${client.id}"/>">Modifier le profil</a>
                             </div>
 
                             <div class="content">

@@ -1,6 +1,7 @@
 package com.projet.presentation;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -110,18 +111,30 @@ public class HomeController {
 		return mav;
 	}
 	
-	@PostMapping("/see/client/{id}")
-	public String modifyClient (@Valid @ModelAttribute("client") Client client, BindingResult result) {
+	@GetMapping("/modify/client/{id}")
+	public ModelAndView modifyClient(@PathVariable Long id) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("client", clientServiceImpl.findById(id));
+		mav.setViewName("edit-client");
+		return mav;
+	}
+	
+	@PostMapping("/modify/client/{id}")
+	public ModelAndView modifyClient (@Valid @ModelAttribute("client") Client clientForm, BindingResult result, @PathVariable Long id) {
+		ModelAndView mav = new ModelAndView();
+		
 		if (result.hasErrors()) {
-			return "see/client";
+			mav.setViewName("edit-client");
+			return mav;
 		}
 		try {
-			clientServiceImpl.update(client);
-			return "redirect:/see/clients";
+			clientServiceImpl.update(clientForm, id);
+			return new ModelAndView("redirect:/see/client/"+id);
 		}
 		catch (ClientServiceException e) {
 			result.rejectValue(e.getChamp(), e.getChamp(), e.getMessage());
-			return "see/client";
+			mav.setViewName("edit-client");
+			return mav;
 		}
 	}
 	
@@ -134,17 +147,37 @@ public class HomeController {
 	}
 	
 	@PostMapping("/create/client")
-	public String createClientIn(@Valid @ModelAttribute("client") Client client, BindingResult result) {
+	public ModelAndView createClientIn(@Valid @ModelAttribute("client") Client client, BindingResult result, @RequestParam(required = false) boolean saving, @RequestParam(required = false) boolean current) {
+		ModelAndView mav = new ModelAndView();
+		
 		if (result.hasErrors()) {
-			return "create/client";
+			mav.setViewName("create-client");
+			return mav;
 		}
 		try {
-			clientServiceImpl.update(client);
-			return "redirect:/see/clients";
+			CurrentAccount c = null;
+			SavingAccount s = null;
+			if(current){
+				c = new CurrentAccount();
+			}
+			
+			if(saving){
+				s = new SavingAccount();
+			}
+			
+			if(!current && !saving){
+				throw new ClientServiceException("", "No account checked");
+			}
+			
+			client.setCounselor(((UserSecurity)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getCouselor());
+			
+			clientServiceImpl.create(client, c, s);
+			return new ModelAndView("redirect:/see/clients");
 		}
 		catch (ClientServiceException e) {
 			result.rejectValue(e.getChamp(), e.getChamp(), e.getMessage());
-			return "create/client";
+			mav.setViewName("create-client");
+			return mav;
 		}
 	}
 	

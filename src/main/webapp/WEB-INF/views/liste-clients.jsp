@@ -16,7 +16,7 @@
                         <div class="card">
                             <div class="header">
                                 <h4 class="col-md-10 title">Liste des clients</h4>
-                                <a class="col-md-2 btn btn-success btn-fill btn-wd" href="<%=request.getContextPath()%>/create/client">Nouveau client</a>
+                                <a class="col-md-2 btn btn-success btn-fill btn-wd" href="<%=request.getContextPath()%>/create/client/">Nouveau client</a>
                             </div>
                             
                             <div class="content">
@@ -38,7 +38,7 @@
                                                 <td><c:out value="${client.firstName}"/></td>
                                                 <td class="text-center">
                                                 	<c:choose>
-                                                		<c:when test="${client.currentAccount.sold > 0}">
+                                                		<c:when test="${client.currentAccount.sold >= 0}">
                                                 			<i class="fa fa-check text-success"></i>
                                                 		</c:when>
                                                 		<c:otherwise>
@@ -48,7 +48,7 @@
                                                 </td>
                                                 <td class="text-center">
                                                 	<c:choose>
-                                                		<c:when test="${client.savingAccount.sold > 0}">
+                                                		<c:when test="${client.savingAccount.sold >= 0}">
                                                 			<i class="fa fa-check text-success"></i>
                                                 		</c:when>
                                                 		<c:otherwise>
@@ -60,7 +60,7 @@
                                                     <a class="btn btn-post-action btn-simple btn-info btn-icon table-action view" href="<%=request.getContextPath()%>/see/client/<c:out value="${client.id}"/>" rel="tooltip" data-original-title="Voir profil">
                                                         <i class="fa fa-external-link"></i>
                                                     </a>
-                                                    <a class="btn btn-post-action btn-simple btn-success btn-icon table-action edit" href="javascript:void(0)" rel="tooltip" title="" data-original-title="Modifier">
+                                                    <a class="btn btn-post-action btn-simple btn-success btn-icon table-action edit" href="<%=request.getContextPath()%>/modify/client/<c:out value="${client.id}"/>" rel="tooltip" title="" data-original-title="Modifier">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
                                                     <a class="btn btn-post-action btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)" rel="tooltip" title="" data-original-title="Supprimer">
