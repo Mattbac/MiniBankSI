@@ -16,7 +16,7 @@
                             <div class="content">
 								<div class="row">
 
-									<div class="col-md-3">
+									<div class="col-md-">
 										<div class="card">
 											<div class="header">
 												<div class="row">
@@ -40,7 +40,7 @@
 										</div>
 		                            </div>
 	
-									<div class="col-md-3">
+									<div class="col-md-4">
 										<div class="card">
 											<div class="header">
 												<div class="row">
@@ -64,7 +64,7 @@
 										</div>
 		                            </div>
 	
-									<div class="col-md-3">
+									<div class="col-md-4">
 									<div class="card">
 										<div class="header">
 											<div class="row">
@@ -87,8 +87,7 @@
 										</div>
 									</div>
 	                            </div>
-								</div>
-
+							</div>
                         </div>
                     </div>
                 </div>
