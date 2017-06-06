@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.projet.dao.IClientDAO;
 import com.projet.dao.ICurrentAccountDAO;
 import com.projet.dao.ISavingAccountDAO;
-import com.projet.entity.AbstractAccount;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.entity.CurrentAccount;

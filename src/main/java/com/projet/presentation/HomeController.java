@@ -27,7 +27,9 @@ import com.projet.exception.ClientServiceException;
 import com.projet.dao.IManagerDAO;
 import com.projet.dao.IRoleDAO;
 import com.projet.dao.ISavingAccountDAO;
+import com.projet.dao.IAbstractAccountDAO;
 import com.projet.dao.IClientDAO;
+import com.projet.entity.AbstractAccount;
 import com.projet.entity.Client;
 import com.projet.entity.Counselor;
 import com.projet.entity.CurrentAccount;
@@ -52,6 +54,8 @@ public class HomeController {
 	private IManagerDAO managerDaoImpl;
 	@Autowired
 	private ICounselorDAO counselorDaoImpl;
+	@Autowired
+	private IAbstractAccountDAO abstractAccountDaoImpl; 
 	@Autowired
 	private ICurrentAccountDAO currentAccountDaoImpl;
 	@Autowired
@@ -252,6 +256,32 @@ public class HomeController {
 	public String transfert() {
 		return "transfert";
 	}
+	
+	@RequestMapping(value = "/transfert", method = RequestMethod.POST)
+	public ModelAndView makeTransfert( 
+			@RequestParam String debitAccount, 
+			@RequestParam String creditAccount, 
+			@RequestParam BigDecimal sum) {
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			AbstractAccount accountOne = abstractAccountDaoImpl.findAccountByAccountNumber(debitAccount);
+			AbstractAccount accountTwo = abstractAccountDaoImpl.findAccountByAccountNumber(creditAccount);
+			
+			accountOne.toString();
+			accountTwo.toString();
+			
+			abstractAccountService.virement(accountTwo, accountOne, sum);
+			
+			return new ModelAndView("redirect:/see/clients");
+		}
+		catch (Exception e) {
+			mav.setViewName("transfert");
+			e.printStackTrace();
+			return mav;
+		}
+	}
+	
 	
 	@RequestMapping(value = "/options", method = RequestMethod.GET)
 	public String options() {

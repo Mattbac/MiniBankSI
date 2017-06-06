@@ -16,7 +16,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Modification des informations client</h4>
+                                <h4 class="title">Création d'un nouveau client</h4>
                             </div>
                             <div class="content">
                                 <f:form modelAttribute="client" method="post">
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn btn-info btn-fill pull-right">Create</button>
+                                    <button type="submit" class="btn btn-info btn-fill pull-right">Créer le client</button>
                                     <div class="clearfix"></div>
                                 </f:form>
                             </div>
