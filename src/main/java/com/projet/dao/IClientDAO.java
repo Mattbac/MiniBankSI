@@ -13,4 +13,5 @@ public interface IClientDAO {
 	public void deleteClient(Client client);
 	public List<Client> findClientsByCounselor(Counselor counselor);
 	public List<Client> findClientsByNegativeSold();
+	public List<Client> findAllClients();
 }

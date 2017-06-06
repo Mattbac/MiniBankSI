@@ -53,4 +53,10 @@ public class ClientDaoImpl implements IClientDAO{
 		return q.getResultList();
 	}
 
+	@Override
+	public List<Client> findAllClients() {
+		TypedQuery<Client> q = em.createQuery("from Client", Client.class);
+		return q.getResultList();
+	}
+
 }
