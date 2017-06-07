@@ -37,7 +37,7 @@ public class Init implements IInit {
 	@Override
 	public void initialize () {
 		
-		if(roleDaoImpl.get() != null) {
+		if(roleDaoImpl.get().size() != 0) {
 			return;
 		}
 		
